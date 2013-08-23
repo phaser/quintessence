@@ -439,3 +439,20 @@ macro(include_ios_framework)
         MESSAGE (STATUS "Framework ${NAME} found at ${FRAMEWORK_${NAME}} and included.")
     ENDIF (${FRAMEWORK_${NAME}} STREQUAL FRAMEWORK_${NAME}-NOTFOUND)
 endmacro(include_ios_framework)
+
+macro(export_ios_framework)
+    SET(LIF_PROJ_NAME ${ARGV0})
+    SET(LIF_NAME ${ARGV1})
+    FIND_LIBRARY (FRAMEWORK_${LIF_NAME}
+                  NAMES ${LIF_NAME}
+                  PATHS ${CMAKE_OSX_SYSROOT}/System/Library ${ARGV1}
+                  PATH_SUFFIXES Frameworks
+                  NO_DEFAULT_PATH)
+    MARK_AS_ADVANCED(FRAMEWORK_${LIF_NAME})
+    IF (${FRAMEWORK_${LIF_NAME}} STREQUAL FRAMEWORK_${LIF_NAME}-NOTFOUND)
+        MESSAGE (ERROR ": Framework ${LIF_NAME} not found")
+    ELSE (${FRAMEWORK_${LIF_NAME}} STREQUAL FRAMEWORK_${LIF_NAME}-NOTFOUND)
+        SET(EXPORTED_${LIF_PROJ_NAME}_LIB "${FRAMEWORK_${LIF_NAME}}" CACHE INTERNAL ${PROJ_NAME} FORCE)
+        MESSAGE (STATUS "Framework ${LIF_NAME} found at ${FRAMEWORK_${LIF_NAME}}")
+    ENDIF (${FRAMEWORK_${LIF_NAME}} STREQUAL FRAMEWORK_${LIF_NAME}-NOTFOUND)
+endmacro()

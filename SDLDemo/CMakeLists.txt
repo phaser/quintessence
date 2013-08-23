@@ -8,4 +8,8 @@ if (OSX)
     set (BUILD_TYPE MACOSX_BUNDLE CACHE INTERNAL "Build type" FORCE)
 endif ()
 
+add_module_dependency(${PROJ_NAME} "SDL2" "2.0.0")
+
 build_module(${PROJ_NAME} ${BUILD_TYPE})
+
+link_module_dependencies(${PROJ_NAME})
