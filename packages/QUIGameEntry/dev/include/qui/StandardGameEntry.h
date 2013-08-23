@@ -1,4 +1,4 @@
-// Copyright (C) 2012 Cristian Bidea
+ta/ Copyright (C) 2012 Cristian Bidea
 // This file is part of QUIGameEntry.
 //
 //    QUIGameEntry is free software: you can redistribute it and/or modify

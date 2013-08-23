@@ -22,3 +22,7 @@ StandardGameEntry::StandardGameEntry()
 }
 }  // namespace qui
 
+int main(int argc, char** argv)
+{
+    return 0;
+}
