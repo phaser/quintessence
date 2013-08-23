@@ -1,0 +1,24 @@
+<build-config>
+    <build-target target-name="Default" to-be-built="SDKDemo">
+        <platform>linux</platform>
+	    <projects-root-dir>projects/</projects-root-dir>
+    	<kral-path>KRAL/</kral-path>
+        <project-type>Unix Makefiles</project-type>
+        <cmake>cmake</cmake>
+        <package-dirs>../packages/qui;../packages/third_party;../packages/wrappers;../cocos</package-dirs>
+        <generate-make-list>1</generate-make-list>
+    </build-target>
+
+    <build-target target-name="TestGameQT">
+        <platform>osx</platform>
+        <project-dir>SDLDemo</project-dir>
+        <build-dir>SDKDemo</build-dir>
+        <cmake-project-type>Xcode</cmake-project-type>
+        <custom-args>
+            -Wdev 
+            -DRUNTIME_SUFFIX=/Debug 
+            -DTESTS=True
+        </custom-args>
+    </build-target>
+</build-config>
+
