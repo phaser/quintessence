@@ -9,6 +9,7 @@ if (OSX)
 endif ()
 
 add_module_dependency(${PROJ_NAME} "SDL2" "2.0.0")
+add_module_dependency(${PROJ_NAME} "QUIGameEntry" "dev")
 
 build_module(${PROJ_NAME} ${BUILD_TYPE})
 

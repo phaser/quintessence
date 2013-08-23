@@ -1,5 +1,5 @@
 <build-config>
-    <build-target target-name="Default" to-be-built="SDKDemo">
+    <build-target target-name="Default" to-be-built="SDLDemo-osx">
         <platform>linux</platform>
 	    <projects-root-dir>projects/</projects-root-dir>
     	<kral-path>KRAL/</kral-path>
@@ -17,7 +17,6 @@
         <custom-args>
             -Wdev 
             -DRUNTIME_SUFFIX=/Debug 
-            -DTESTS=True
         </custom-args>
     </build-target>
 </build-config>
