@@ -19,5 +19,16 @@
             -DRUNTIME_SUFFIX=/Debug 
         </custom-args>
     </build-target>
+	
+    <build-target target-name="SDLDemo-win32">
+        <platform>win32</platform>
+        <project-dir>SDLDemo</project-dir>
+        <build-dir>SDLDemo</build-dir>
+        <cmake-project-type>Visual Studio 11 Win64</cmake-project-type>
+        <custom-args>
+            -Wdev 
+            -DRUNTIME_SUFFIX=/Debug 
+        </custom-args>
+    </build-target>	
 </build-config>
 
