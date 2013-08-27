@@ -11,8 +11,9 @@ elseif (WIN32)
 	set (BUILD_TYPE WIN32 CACHE INTERNAL "Build type" FORCE)
 endif ()
 
-add_module_dependency(${PROJ_NAME} "SDL2" "2.0.0")
 add_module_dependency(${PROJ_NAME} "QUIGameEntry" "dev")
+add_module_dependency(${PROJ_NAME} "QUIUtils" "dev")
+add_module_dependency(${PROJ_NAME} "SDL2" "2.0.0")
 
 build_module(${PROJ_NAME} ${BUILD_TYPE})
 

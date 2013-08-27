@@ -21,6 +21,7 @@ PROJECT (${PROJ_NAME})
 #ENDIF (ANDROID)
 
 add_module_dependency(${PROJ_NAME} "QUIUtils" "dev")
+add_module_dependency(${PROJ_NAME} "SDL2" "2.0.0")
 
 make_library(${PROJ_NAME})
 
