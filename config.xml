@@ -5,7 +5,7 @@
     	<kral-path>KRAL/</kral-path>
         <project-type>Unix Makefiles</project-type>
         <cmake>cmake</cmake>
-        <package-dirs>../packages</package-dirs>
+        <package-dirs>../packages;../thirdparty</package-dirs>
         <generate-make-list>1</generate-make-list>
     </build-target>
 
@@ -27,7 +27,7 @@
         <cmake-project-type>Visual Studio 11 Win64</cmake-project-type>
         <custom-args>
             -Wdev 
-            -DRUNTIME_SUFFIX=/Debug 
+            -DRUNTIME_SUFFIX=/Debug/SDLDemo.app 
         </custom-args>
     </build-target>	
 </build-config>

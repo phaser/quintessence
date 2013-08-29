@@ -2,13 +2,19 @@
 
 class SDLGame : public qui::StandardGameEntry
 {
-    SDLGame();
-    void init();
-    void update(uint64_t dt);
-    void paint();
-    void cleanup();
-    void onSystemEvent(qui::SystemEvent event);
+    public:
+        SDLGame();
+        void init();
+        void update(uint64_t dt);
+        void paint();
+        void cleanup();
+        void onSystemEvent(qui::SystemEvent event);
 };
+
+namespace qui
+{
+    std::unique_ptr<qui::StandardGameEntry> game (new SDLGame());
+}  // namespace qui
 
 SDLGame::SDLGame()
     : StandardGameEntry()

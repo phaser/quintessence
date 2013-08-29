@@ -50,6 +50,21 @@ int main(int argc, char** argv)
     
     while (1)
     {
+        SDL_Event e;
+        if (SDL_PollEvent(&e))
+        {
+            if (e.type == SDL_QUIT)
+            {
+                break;
+            }
+            else if (e.type == SDL_KEYUP && e.key.keysym.sym == SDLK_ESCAPE)
+            {
+                break;
+            }
+
+            qui::game->update(0);
+            qui::game->paint();
+        }
     }
     return 0;
 }
