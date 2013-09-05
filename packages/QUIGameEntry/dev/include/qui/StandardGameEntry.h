@@ -16,6 +16,7 @@
 #ifndef PACKAGES_QUI_QUIGAMEENTRY_DEV_INCLUDE_QUI_STANDARDGAMEENTRY_H_
 #define PACKAGES_QUI_QUIGAMEENTRY_DEV_INCLUDE_QUI_STANDARDGAMEENTRY_H_
 
+#include <qui/GLWindow.h>
 #include <qui/cpp11compat.h>
 #include <stdint.h>
 
@@ -59,8 +60,12 @@ class StandardGameEntry
      * System events
      */
     virtual void onSystemEvent(SystemEvent event) =0;
+    GLWindow& getWindow() const;
+    void setWindow(GLWindow win);
+ private:
+    cpp0x::shared_ptr<GLWindow> window;
 };
 
-extern std::unique_ptr<StandardGameEntry> game;
+extern std::auto_ptr<StandardGameEntry> game;
 }  // namespace qui
 #endif  // PACKAGES_QUI_QUIGAMEENTRY_DEV_INCLUDE_QUI_STANDARDGAMEENTRY_H_

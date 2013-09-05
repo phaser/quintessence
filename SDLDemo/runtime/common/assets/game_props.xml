@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://texturepacker.com-->
+<!-- $TexturePacker:SmartUpdate:3050707bccf8dedafbca78d4b8a1ea84$ -->
+<!--Format:
+n  => name of the sprite
+x  => sprite x pos in texture
+y  => sprite y pos in texture
+w  => sprite width (may be trimmed)
+h  => sprite height (may be trimmed)
+oX => sprite's x-corner offset (only available if trimmed)
+oY => sprite's y-corner offset (only available if trimmed)
+oW => sprite's original width (only available if trimmed)
+oH => sprite's original height (only available if trimmed)
+r => 'y' only set if sprite is rotated
+-->
+<TextureAtlas imagePath="assets/game_props.png" width="256" height="512">
+    <sprite n="boat_lvl1" x="2" y="50" w="115" h="298" r="y"/>
+    <sprite n="boat_lvl1_turet" x="117" y="142" w="82" h="42"/>
+    <sprite n="bullet_enemy" x="242" y="140" w="12" h="46" r="y"/>
+    <sprite n="bullet_player" x="224" y="140" w="18" h="96" r="y"/>
+    <sprite n="enemy_boat" x="2" y="2" w="126" h="48"/>
+    <sprite n="enemy_boat_dead" x="128" y="2" w="126" h="48"/>
+    <sprite n="enemy_turet_lvl1" x="224" y="50" w="26" h="45" r="y"/>
+    <sprite n="enemy_turet_lvl1_dead" x="224" y="95" w="26" h="45" r="y"/>
+    <sprite n="explosion" x="117" y="50" w="107" h="92"/>
+    <sprite n="muzzle_flash_enemy" x="180" y="184" w="38" h="34"/>
+    <sprite n="muzzle_flash_player" x="117" y="184" w="63" h="60" r="y"/>
+</TextureAtlas>

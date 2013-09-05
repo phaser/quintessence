@@ -1,0 +1,61 @@
+<object class="LoadList">
+    <member id="shaders" type="array">
+        <object class="ShaderDescriptor">
+            <member id="name" type="string">qui::Q2D::textured</member>
+            <member id="fragment" type="string">assets/textured_no_color.fsh</member>
+            <member id="vertex" type="string">assets/textured_no_color.vsh</member>
+        </object>
+        <object class="ShaderDescriptor">
+            <member id="name" type="string">qui::Q2D::color</member>
+            <member id="fragment" type="string">assets/color.fsh</member>
+            <member id="vertex" type="string">assets/color.vsh</member>
+        </object>
+    </member>
+    <member id="atlasses" type="array">
+        <object class="AtlasDescriptor">
+            <member id="file" type="string">assets/game_props.xml</member>
+        </object>
+    </member>
+    <member id="textures" type="array">
+        <object class="TextureDescriptor">
+            <member id="name" type="string">mainfont</member>
+            <member id="image" type="string">assets/testfont.png</member> 
+        </object>
+        <object class="TextureDescriptor">
+            <member id="name" type="string">background</member>
+            <member id="image" type="string">assets/loading/background_loading.png</member> 
+        </object>
+        <object class="TextureDescriptor">
+            <member id="name" type="string">watertile</member>
+            <member id="image" type="string">assets/water_tile.png</member> 
+        </object>
+    </member>
+    <member id="materials" type="array">
+        <object class="MaterialDescriptor">
+            <member id="name" type="string">Loading::Background</member>
+            <member id="shader" type="string">qui::Q2D::textured</member>
+            <member id="texture" type="string">background</member>
+        </object>
+        <object class="MaterialDescriptor">
+            <member id="name" type="string">qui::Q2D::color</member>
+            <member id="shader" type="string">qui::Q2D::color</member>
+        </object>
+        <object class="MaterialDescriptor">
+            <member id="name" type="string">Game::MainFont</member>
+            <member id="shader" type="string">qui::Q2D::textured</member>
+            <member id="texture" type="string">mainfont</member>
+        </object>
+        <object class="MaterialDescriptor">
+            <member id="name" type="string">Game::WaterTile</member>
+            <member id="shader" type="string">qui::Q2D::textured</member>
+            <member id="texture" type="string">watertile</member>
+        </object>
+    </member>
+    <member id="fonts" type="array">
+        <object class="FontDescriptor">
+            <member id="fontName" type="string">MainFont</member>
+            <member id="fileName" type="string">assets/testfont.fnt</member>
+            <member id="material" type="string">Game::MainFont</member>
+        </object>
+    </member>
+</object>

@@ -30,7 +30,7 @@ struct TestStruct
 TEST_F(TestUniversalHashStore, TestStoreGet)  // NOLINT
 {
     qui::UniversalHashStore<struct TestStruct*> store;
-    std::unique_ptr<struct TestStruct> obj(new struct TestStruct());
+    std::auto_ptr<struct TestStruct> obj(new struct TestStruct());
     obj->a = 10;
     size_t static_hash = qui::Hash("Test string").value;
     store.store(static_hash, obj.get());
