@@ -3,9 +3,13 @@ cmake_minimum_required (VERSION 2.8)
 SET (PROJ_NAME "QUIText")
 PROJECT (${PROJ_NAME})
 
+
+if (TESTS)
+    add_module_dependency(${PROJ_NAME} "gtest" "1.6.0")
+endif() 
+
 add_module_dependency(${PROJ_NAME} "lodepng" "20120729")
 add_module_dependency(${PROJ_NAME} "glm" "0.9.3.3")
-add_module_dependency(${PROJ_NAME} "gtest" "1.6.0")
 add_module_dependency(${PROJ_NAME} "QUIUtils" "dev")
 add_module_dependency(${PROJ_NAME} "QUIOpenGLES" "dev")
 add_module_dependency(${PROJ_NAME} "QUIVirtualFS" "dev")

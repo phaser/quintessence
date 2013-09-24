@@ -26,3 +26,9 @@ add_module_dependency(${PROJ_NAME} "QUIResourceLoader" "dev")
 build_module(${PROJ_NAME} ${BUILD_TYPE})
 
 link_module_dependencies(${PROJ_NAME})
+
+if (OSX)
+    link_ios_framework(${PROJ_NAME} "Cocoa")
+    link_ios_framework(${PROJ_NAME} "GLKit")
+    link_ios_framework(${PROJ_NAME} "OpenGL")
+endif ()
