@@ -6,12 +6,11 @@ include (KRALMain)
 set (RUNTIME_DIR "${CMAKE_BINARY_DIR}")
 
 if (OSX)
-    set (BUILD_TYPE MACOSX_BUNDLE CACHE INTERNAL "Build type" FORCE)
+    set (BUILD_TYPE MACOSX_BUNDLE)
 elseif (WIN32)
-	set (BUILD_TYPE WIN32 CACHE INTERNAL "Build type" FORCE)
+	set (BUILD_TYPE WIN32)
 endif ()
 
-add_module_dependency(${PROJ_NAME} "QUIGameEntry" "dev")
 add_module_dependency(${PROJ_NAME} "QUIUtils" "dev")
 add_module_dependency(${PROJ_NAME} "SDL2" "2.0.0")
 add_module_dependency(${PROJ_NAME} "QUI2D" "dev")
@@ -22,6 +21,7 @@ add_module_dependency(${PROJ_NAME} "QUIRenderer" "dev")
 add_module_dependency(${PROJ_NAME} "QUIInput" "dev")
 add_module_dependency(${PROJ_NAME} "QUIReflection" "dev")
 add_module_dependency(${PROJ_NAME} "QUIResourceLoader" "dev")
+add_module_dependency(${PROJ_NAME} "QUIGameEntry" "dev")
 
 build_module(${PROJ_NAME} ${BUILD_TYPE})
 

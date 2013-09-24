@@ -18,7 +18,7 @@
 namespace qui
 {
 StandardGameEntry::StandardGameEntry()
-    : window(cpp0x::shared_ptr<GLWindow> (new GLWindow("", 0, 0)))
+    : window(cpp0x::shared_ptr<GLWindow> (new GLWindow("Default", 640, 480)))
 {
 }
 
@@ -30,6 +30,12 @@ GLWindow& StandardGameEntry::getWindow() const
 void StandardGameEntry::setWindow(GLWindow win)
 {
     *this->window = win;
+}
+    
+int main(const int /*argc*/, const char* argv[])
+{
+    
+    return 0;
 }
 }  // namespace qui
 

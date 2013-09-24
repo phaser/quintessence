@@ -68,4 +68,6 @@ class StandardGameEntry
 
 extern std::auto_ptr<StandardGameEntry> game;
 }  // namespace qui
+
+int main(const int argc, const char* argv[]);
 #endif  // PACKAGES_QUI_QUIGAMEENTRY_DEV_INCLUDE_QUI_STANDARDGAMEENTRY_H_
