@@ -14,6 +14,7 @@
 //    You should have received a copy of the GNU Lesser General Public License
 //    along with QUIGameEntry.  If not, see <http://www.gnu.org/licenses/>.
 #include <qui/StandardGameEntry.h>
+#include <iostream>
 
 namespace qui
 {
@@ -31,11 +32,14 @@ void StandardGameEntry::setWindow(GLWindow win)
 {
     *this->window = win;
 }
-    
-int main(const int /*argc*/, const char* argv[])
-{
-    
-    return 0;
-}
 }  // namespace qui
 
+/* The entry point of the application */
+int main(const int /*argc*/, const char* argv[])
+{
+    while (1)
+    {
+        std::cout << "Test" << std::endl;
+    }
+    return 0;
+}

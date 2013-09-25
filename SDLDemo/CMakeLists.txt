@@ -11,10 +11,10 @@ elseif (WIN32)
 	set (BUILD_TYPE WIN32)
 endif ()
 
-add_module_dependency(${PROJ_NAME} "QUIUtils" "dev")
-add_module_dependency(${PROJ_NAME} "SDL2" "2.0.0")
+#add_module_dependency(${PROJ_NAME} "SDL2" "2.0.0")
 add_module_dependency(${PROJ_NAME} "QUI2D" "dev")
 add_module_dependency(${PROJ_NAME} "glm" "0.9.3.3")
+add_module_dependency(${PROJ_NAME} "QUIUtils" "dev")
 add_module_dependency(${PROJ_NAME} "QUIText" "dev")
 add_module_dependency(${PROJ_NAME} "QUIOpenGLES" "dev")
 add_module_dependency(${PROJ_NAME} "QUIRenderer" "dev")
@@ -22,6 +22,7 @@ add_module_dependency(${PROJ_NAME} "QUIInput" "dev")
 add_module_dependency(${PROJ_NAME} "QUIReflection" "dev")
 add_module_dependency(${PROJ_NAME} "QUIResourceLoader" "dev")
 add_module_dependency(${PROJ_NAME} "QUIGameEntry" "dev")
+
 
 build_module(${PROJ_NAME} ${BUILD_TYPE})
 

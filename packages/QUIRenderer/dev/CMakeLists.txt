@@ -19,6 +19,7 @@ SET (PROJ_NAME "QUIRenderer")
 PROJECT (${PROJ_NAME})
 
 
+add_module_dependency(${PROJ_NAME} "QUIUtils" "dev")
 add_module_dependency(${PROJ_NAME} "QUIOpenGLES" "dev")
 add_module_dependency(${PROJ_NAME} "QUIVirtualFS" "dev")
 add_module_dependency(${PROJ_NAME} "QUIImage" "dev")
