@@ -15,6 +15,9 @@
 //    along with QUIGameEntry.  If not, see <http://www.gnu.org/licenses/>.
 #include <qui/StandardGameEntry.h>
 #include <iostream>
+#include <SDL2/SDL.h>
+#include <qui/log.h>
+#include <qui/Timer.h>
 
 namespace qui
 {
@@ -37,9 +40,58 @@ void StandardGameEntry::setWindow(GLWindow win)
 /* The entry point of the application */
 int main(const int /*argc*/, const char* argv[])
 {
-    while (1)
+    if (SDL_Init(SDL_INIT_EVERYTHING) == -1)
     {
-        std::cout << "Test" << std::endl;
+        LOG(FATAL) << "SDL_Init failed. " << SDL_GetError();
     }
+    
+    SDL_Window *win = nullptr;
+    win = SDL_CreateWindow(qui::game->getWindow().getWindowName().c_str()
+                         , SDL_WINDOWPOS_CENTERED
+                         , SDL_WINDOWPOS_CENTERED
+                         , qui::game->getWindow().getSize().x
+                         , qui::game->getWindow().getSize().y
+                         , SDL_WINDOW_SHOWN);
+    if (win == nullptr)
+    {
+        LOG(FATAL) << "Window initialization failed. " << SDL_GetError();
+    }
+    
+    SDL_Renderer *ren = nullptr;
+    ren = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+    if (ren == nullptr)
+    {
+        LOG(FATAL) << SDL_GetError();
+    }
+    
+    qui::game->init();
+    qui::Timer timer;
+    bool quit = false;
+    while (!quit)
+    {
+        SDL_Event e;
+        while (SDL_PollEvent(&e))
+        {
+            LOG(INFO) << "Event type: " << e.type;
+            if (e.type == SDL_QUIT)
+            {
+                quit = true;
+            }
+            else if (e.type == SDL_MOUSEBUTTONDOWN)
+            {
+                LOG(INFO) << "Mouse button down";
+            }
+        }
+        qui::game->update(timer.getDeltaTime());
+        SDL_RenderClear(ren);
+        qui::game->paint();
+        SDL_RenderPresent(ren);
+        SDL_Delay(10);
+    }
+    
+    qui::game->cleanup();
+    SDL_DestroyRenderer(ren);
+    SDL_DestroyWindow(win);
+    SDL_Quit();
     return 0;
 }

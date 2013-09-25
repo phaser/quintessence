@@ -6,7 +6,7 @@ cmake_minimum_required (VERSION 2.8)
 SET (PROJ_NAME "QUIGameEntry")
 PROJECT (${PROJ_NAME})
 
-
+add_module_dependency(${PROJ_NAME} "SDL2" "2.0.0")
 add_module_dependency(${PROJ_NAME} "QUIOpenGLES" "dev")
 add_module_dependency(${PROJ_NAME} "QUIVirtualFS" "dev")
 add_module_dependency(${PROJ_NAME} "QUIInput" "dev")
