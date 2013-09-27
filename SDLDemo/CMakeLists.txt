@@ -14,7 +14,7 @@ elseif (IOS)
     set_global_target_property(XCODE_ATTRIBUTE_IPHONEOS_DEPLOYMENT_TARGET 5.0) 
 endif ()
 
-#add_module_dependency(${PROJ_NAME} "SDL2" "2.0.0")
+add_module_dependency(${PROJ_NAME} "SDL2" "2.0.0")
 add_module_dependency(${PROJ_NAME} "QUI2D" "dev")
 add_module_dependency(${PROJ_NAME} "glm" "0.9.3.3")
 add_module_dependency(${PROJ_NAME} "QUIUtils" "dev")

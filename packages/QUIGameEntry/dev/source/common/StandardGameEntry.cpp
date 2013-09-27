@@ -16,8 +16,11 @@
 #include <qui/StandardGameEntry.h>
 #include <iostream>
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_main.h>
+
 #include <qui/log.h>
 #include <qui/Timer.h>
+
 
 namespace qui
 {
@@ -38,7 +41,11 @@ void StandardGameEntry::setWindow(GLWindow win)
 }  // namespace qui
 
 /* The entry point of the application */
-int main(const int /*argc*/, const char* argv[])
+#ifdef PLATFORM_OSX
+int main(int argc, char* argv[])
+#else
+int SDL_main(int argc, char* argv[])
+#endif
 {
     if (SDL_Init(SDL_INIT_EVERYTHING) == -1)
     {
