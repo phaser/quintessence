@@ -422,7 +422,8 @@ macro(link_ios_framework)
     SET(LIF_NAME ${ARGV1})
     FIND_LIBRARY (FRAMEWORK_${LIF_NAME}
                   NAMES ${LIF_NAME}
-                  PATHS ${CMAKE_OSX_SYSROOT}/System/Library ${ARGV1}
+                  PATHS ${CMAKE_OSX_SYSROOT}/System/Library
+                  PATHS ${ARGV1}
                   PATH_SUFFIXES Frameworks
                   NO_DEFAULT_PATH)
     MARK_AS_ADVANCED(FRAMEWORK_${LIF_NAME})
