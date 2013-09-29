@@ -17,6 +17,7 @@
 #include <qui/ReflectionManager.h>
 #include <qui/ReflectableObject.h>
 #include <qui/log.h>
+#include <functional>
 #include <map>
 #include <string>
 #include <algorithm>

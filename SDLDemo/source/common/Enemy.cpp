@@ -19,6 +19,7 @@
 #include <qui/Sprite.h>
 #include <qui/log.h>
 #include <qui/Hash.h>
+#include <qui/cpp11compat.h>
 
 using qui::Q2D::Sprite;
 uint16_t Enemy::static_uid = 0;

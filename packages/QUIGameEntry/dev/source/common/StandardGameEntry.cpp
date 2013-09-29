@@ -17,10 +17,8 @@
 #include <iostream>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_main.h>
-
 #include <qui/log.h>
 #include <qui/Timer.h>
-
 
 namespace qui
 {

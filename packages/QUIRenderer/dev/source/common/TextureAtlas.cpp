@@ -100,9 +100,7 @@ bool TextureAtlas::createMaterials(size_t shaderId)
     qui::ShaderManager sm;
     tm.loadTexture(this->image.c_str());
     unsigned int textureId = HASH(this->image.c_str());
-    for (std::vector<cpp0x::shared_ptr<TextureAtlasModule> >::iterator it = modules.begin()
-       ; it != modules.end()
-       ; it++)
+    for (auto it = modules.begin(); it != modules.end(); it++)
     {
         cpp0x::shared_ptr<TextureAtlasModule> module = *it;
         cpp0x::shared_ptr<qui::Material> material(new qui::Material());
@@ -111,5 +109,6 @@ bool TextureAtlas::createMaterials(size_t shaderId)
         material->setTextureAtlasModule(module);
         mm.addMaterial(module->name.c_str(), material);
     }
+	return true;
 }
 }  // namespace qui
