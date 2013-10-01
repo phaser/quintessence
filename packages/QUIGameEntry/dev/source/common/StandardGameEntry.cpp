@@ -17,7 +17,9 @@
 #include <iostream>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_main.h>
-
+#include <SDL2/SDL_mouse.h>
+#include <qui/InputInterface.h>
+#include <qui/TouchInputEvent.h>
 #include <qui/log.h>
 #include <qui/Timer.h>
 
@@ -47,6 +49,8 @@ int main(int argc, char* argv[])
 int SDL_main(int argc, char* argv[])
 #endif
 {
+    using qui::input::InputInterface;
+    using qui::input::TouchInputEvent;
     if (SDL_Init(SDL_INIT_EVERYTHING) == -1)
     {
         LOG(FATAL) << "SDL_Init failed. " << SDL_GetError();
@@ -84,11 +88,38 @@ int SDL_main(int argc, char* argv[])
             {
                 quit = true;
             }
-            else if (e.type == SDL_MOUSEBUTTONDOWN)
+            else if (e.type == SDL_MOUSEBUTTONDOWN
+                  || e.type == SDL_MOUSEBUTTONUP)
             {
-                LOG(INFO) << "Mouse button down";
+                int x(0);
+                int y(0);
+                Uint32 state = SDL_GetMouseState(&x, &y);
+                InputInterface ii;
+                if (state == SDL_BUTTON(SDL_BUTTON_LEFT))
+                {
+                    LOG(INFO) << "Mouse button down";
+                    ii.addTouchEvent(new TouchInputEvent(TouchInputEvent::DOWN, 0, x, y));
+                }
+                else
+                {
+                    LOG(INFO) << "Mouse button up";
+                    ii.addTouchEvent(new TouchInputEvent(TouchInputEvent::UP, 0, x, y));
+                }
+            }
+            else if (e.type == SDL_MOUSEMOTION)
+            {
+                int x(0);
+                int y(0);
+                Uint32 state = SDL_GetMouseState(&x, &y);
+                if (state == SDL_BUTTON(SDL_BUTTON_LEFT))
+                {
+                    InputInterface ii;
+                    ii.addTouchEvent(new TouchInputEvent(TouchInputEvent::MOVE, 0, x, y));
+                }
             }
         }
+        InputInterface ii;
+        ii.fireUpdateListeners();
         qui::game->update(timer.getDeltaTime());
         SDL_RenderClear(ren);
         qui::game->paint();
