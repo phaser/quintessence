@@ -44,7 +44,7 @@ void StandardGameEntry::setWindow(GLWindow win)
 
 /* The entry point of the application */
 #ifdef PLATFORM_OSX
-int main(int argc, char* argv[])
+int main(int /* argc */, char** /* argv */)
 #else
 int SDL_main(int argc, char* argv[])
 #endif

@@ -54,7 +54,7 @@ bool LoadingScreen::init()
     return scene->init();
 }
 
-void LoadingScreen::update(uint64_t dt)
+void LoadingScreen::update(uint64_t /* dt */)
 {
 }
 
