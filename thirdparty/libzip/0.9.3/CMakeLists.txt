@@ -2,7 +2,7 @@ cmake_minimum_required (VERSION 2.8)
 
 SET (PROJ_NAME "libzip")
 PROJECT (${PROJ_NAME})
-
+mark_lib_for_reuse(${PROJ_NAME})
 
 add_module_dependency(${PROJ_NAME} "zlib" 		"1.2.5")
 

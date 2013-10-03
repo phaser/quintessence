@@ -10,6 +10,12 @@ INCLUDE (KRALConfig)
 set (SOURCES_EXTENSIONS "*.c;*.cc;*.cpp;*.cxx;*.m;*.mm;*.ui")
 set (INCLUDE_EXTENSIONS "*.h;*.hpp")
 
+macro (mark_lib_for_reuse NAME)
+    if (NOT FORCE_COMPILE_LIBS)
+        set(${PROJ_NAME}_COPY_BACK True)
+    endif()
+endmacro()
+
 MACRO (set_global_target_property property value)
     SET(GLOBAL_TARGET_PROPERTY "${GLOBAL_TARGET_PROPERTY};${property}[]${value}" CACHE INTERNAL "Global target properties" FORCE)
 ENDMACRO (set_global_target_property)
@@ -159,26 +165,44 @@ endmacro(list_files)
 # independent source files and source/${PLATFORM} for platform
 # dependent files.
 macro(make_library NAME)
-	MESSAGE (STATUS "Creating library ${NAME}")
-	IF (EXISTS "${CMAKE_CURRENT_LIST_DIR}/include")
-		include_directories("${CMAKE_CURRENT_LIST_DIR}/include")
-	ENDIF (EXISTS "${CMAKE_CURRENT_LIST_DIR}/include")
+    if (${NAME}_COPY_BACK)
+        if (EXISTS "${CMAKE_CURRENT_LIST_DIR}/lib/${PLATFORM}/")
+            message (STATUS "Skip building ${NAME} because it was already built.")
+            set (${NAME}_DONT_BUILD True CACHE INTERNAL "Don't build ${NAME}" FORCE)
+        endif()
+    endif()
 
-	IF (EXISTS "${CMAKE_CURRENT_LIST_DIR}/include/${PLATFORM}")
-		include_directories("${CMAKE_CURRENT_LIST_DIR}/include/${PLATFORM}")
-	ENDIF (EXISTS "${CMAKE_CURRENT_LIST_DIR}/include/${PLATFORM}")
+    if (NOT ${NAME}_DONT_BUILD)
+	    MESSAGE (STATUS "Creating library ${NAME}")
+	    IF (EXISTS "${CMAKE_CURRENT_LIST_DIR}/include")
+		    include_directories("${CMAKE_CURRENT_LIST_DIR}/include")
+	    ENDIF (EXISTS "${CMAKE_CURRENT_LIST_DIR}/include")
 
-    list_files (${NAME})
+	    IF (EXISTS "${CMAKE_CURRENT_LIST_DIR}/include/${PLATFORM}")
+		    include_directories("${CMAKE_CURRENT_LIST_DIR}/include/${PLATFORM}")
+	    ENDIF (EXISTS "${CMAKE_CURRENT_LIST_DIR}/include/${PLATFORM}")
 
-	add_library (${NAME} ${${NAME}_F_INCLUDE} ${${NAME}_F_SOURCES} ${${NAME}_plaf_F_SOURCES})
-    add_tests(${NAME} ${NAME})
+        list_files (${NAME})
 
-	SET(EXPORTED_${NAME}_LIB ${NAME} CACHE INTERNAL ${NAME} FORCE)
-	IF (IOS)
-		set_property( TARGET ${NAME} PROPERTY XCODE_ATTRIBUTE_IPHONEOS_DEPLOYMENT_TARGET 4.3 )
-	ENDIF (IOS)
-    apply_global_target_properties(${NAME})
-    COPY_RUNTIME_FILES() 
+	    add_library (${NAME} ${${NAME}_F_INCLUDE} ${${NAME}_F_SOURCES} ${${NAME}_plaf_F_SOURCES})
+        add_tests(${NAME} ${NAME})
+
+	    SET(EXPORTED_${NAME}_LIB ${NAME} CACHE INTERNAL ${NAME} FORCE)
+	    IF (IOS)
+		    set_property( TARGET ${NAME} PROPERTY XCODE_ATTRIBUTE_IPHONEOS_DEPLOYMENT_TARGET 4.3 )
+	    ENDIF (IOS)
+        apply_global_target_properties(${NAME})
+
+        if (${NAME}_COPY_BACK)
+            ADD_CUSTOM_COMMAND(TARGET ${NAME}
+                POST_BUILD
+                COMMAND "${CMAKE_COMMAND}" ARGS "-E" "make_directory" "${CMAKE_CURRENT_LIST_DIR}/lib/${PLATFORM}"
+                COMMAND "${CMAKE_COMMAND}" ARGS "-E" "copy" "${CMAKE_CURRENT_BINARY_DIR}/${DEST_PREFIX}/${CMAKE_STATIC_LIBRARY_PREFIX}${NAME}${CMAKE_STATIC_LIBRARY_SUFFIX}" "${CMAKE_CURRENT_LIST_DIR}/lib/${PLATFORM}")
+        endif()
+        COPY_RUNTIME_FILES() 
+    else()
+        export_library(${NAME})
+    endif()
 endmacro(make_library)
 
 # declare_target -> used only to expose the include files for a
@@ -295,6 +319,12 @@ endmacro(build_module)
 
 # add_module_dependency adds a directory and links the target module with the PNAME module.
 macro(add_module_dependency PNAME NAME VERSION)
+    if (${NAME}_COPY_BACK)
+        if (EXISTS "${CMAKE_CURRENT_LIST_DIR}/lib/${PLATFORM}/")
+            return()
+        endif()
+    endif()
+
 	MESSAGE (STATUS "${PNAME}: Adding module dependency ${NAME} [${VERSION}]")
 	SET (PACKAGE_EXISTS False)
 	FOREACH (package ${PACKAGES})
@@ -359,6 +389,11 @@ endmacro(use_module_includes )
 # you call this macro.
 macro(link_module_dependencies)
     SET (PNAME ${ARGV0})
+    if (${PNAME}_COPY_BACK)
+        if (EXISTS "${CMAKE_CURRENT_LIST_DIR}/lib/${PLATFORM}/")
+            return()
+        endif()
+    endif()
     MESSAGE ("LIBS: ${LIBS_${PNAME}}")
     STRING(STRIP ${LIBS_${PNAME}} LIBS_${PNAME})
     STRING(REPLACE " " ";" LIBLIST "${LIBS_${PNAME}}")
