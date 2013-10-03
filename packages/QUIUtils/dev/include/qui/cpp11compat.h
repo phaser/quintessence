@@ -27,6 +27,10 @@ namespace cpp0x = std;
 namespace cpp0x = std::tr1;
 #endif
 
+#if _MSC_VER
+#define snprintf _snprintf
+#endif
+
 template<typename T>
 struct array_deleter
 {

@@ -18,6 +18,7 @@
 #define PACKAGES_QUI_QUIRENDERER_DEV_INCLUDE_QUI_RELEASEOPENGLWRAPPER_H_
 #include <qui/IOpenGLWrapper.h>
 #include <string>
+#include <stdint.h>
 
 namespace qui
 {

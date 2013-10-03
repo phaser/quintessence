@@ -23,7 +23,6 @@
 #include <qui/log.h>
 #include <qui/Timer.h>
 
-
 namespace qui
 {
 StandardGameEntry::StandardGameEntry()
