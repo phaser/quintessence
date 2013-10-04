@@ -2,7 +2,7 @@ cmake_minimum_required (VERSION 2.8)
 
 SET (PROJ_NAME "lodepng")
 PROJECT (${PROJ_NAME})
-
+mark_lib_for_reuse(${PROJ_NAME})
 
 make_library(${PROJ_NAME})
 
