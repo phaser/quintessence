@@ -15,6 +15,7 @@
 //    along with TestGame.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <anim/AnimatorsManager.h>
+#include <qui/log.h>
 
 namespace anim
 {
@@ -22,7 +23,7 @@ qui::UniversalHashStore<cpp0x::shared_ptr<Animator> > AnimatorsManager::animator
 
 void AnimatorsManager::update(uint64_t dt)
 {
-    for (cpp0x::unordered_map<size_t, cpp0x::shared_ptr<Animator> >::iterator it = animators.getMap().begin()
+    for (auto it = animators.getMap().begin()
        ; it != animators.getMap().end()
        ; it++)
     {
