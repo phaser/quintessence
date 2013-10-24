@@ -31,7 +31,13 @@ set (CMAKE_GENERATED_COMMAND "\"${CMAKE_COMMAND}\" ${CUSTOM_ARGS_${T}} -DPACKAGE
 if ("${PLATFORM_${T}}" STREQUAL "android")
     # Determine android target number
     set (ANDROID_BINARY "android")
-    exec_program("${ANDROID_BINARY} list targets")
+    exec_program("${ANDROID_BINARY} list targets" OUTPUT_VARIABLE ALT_OUTPUT RETURN_VALUE ALTRV)
+    if (NOT "${ALTRV}" STREQUAL "0")
+        message(STATUS "${ALT_OUTPUT}")
+        message(FATAL "android list targets returned error code ${ALTRV}")
+    endif()
+    string(REGEX MATCH "id: (.*) or.*${API_LEVEL_${T}}" ALT_MATCH ${ALT_OUTPUT})
+    set(ANDROID_TARGET "${CMAKE_MATCH_1}")
 endif()
 
 if (GENERATE)

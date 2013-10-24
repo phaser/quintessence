@@ -23,7 +23,7 @@ set (CUSTOM_ARGS_${CTARGET}     "${CUSTOM_ARGS_${CTARGET}} -DRUNTIME_SUFFIX=/Deb
 set (CUSTOM_ARGS_${CTARGET}     "${CUSTOM_ARGS_${CTARGET}} -DIOS_SDK_PATH=\"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs\"")
 set (CUSTOM_ARGS_${CTARGET}     "${CUSTOM_ARGS_${CTARGET}} -DTARGETSDK=MacOSX10.8.sdk ")
 set (CUSTOM_ARGS_${CTARGET}     "${CUSTOM_ARGS_${CTARGET}} -DDEST_PREFIX=Debug ")
-set (CUSTOM_ARGS_${CTARGET}     "${CUSTOM_ARGS_${CTARGET}} -DTESTS=True ")
+#set (CUSTOM_ARGS_${CTARGET}     "${CUSTOM_ARGS_${CTARGET}} -DTESTS=True ")
 
 # == TARGET
 set (CTARGET "SDLDemo-iossim")
