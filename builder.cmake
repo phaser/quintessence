@@ -26,8 +26,7 @@ Available targets:")
     message (FATAL_ERROR ${MSG})
 endif ()
 
-set (CMAKE_GENERATED_COMMAND "\"${CMAKE_COMMAND}\" ${CUSTOM_ARGS_${T}} -DPACKAGES=\"${PACKAGE_DIRS}\" -DCMAKE_BUILD_TYPE=Debug -DKRAL_PATH=\"${KRAL_PATH}\" -DPLATFORM=\"${PLATFORM_${T}}\" -G \"${PROJECT_TYPE_${T}}\" \"${PROJECT_DIR_${T}}\" -DCUSTOM_COMPILER_OPTS=\"\"")
-
+set (CMAKE_GENERATED_COMMAND "\"${CMAKE_COMMAND}\" ${CUSTOM_ARGS_${T}} ")
 if ("${PLATFORM_${T}}" STREQUAL "android")
     # Determine android target number
     set (ANDROID_BINARY "android")
@@ -38,7 +37,9 @@ if ("${PLATFORM_${T}}" STREQUAL "android")
     endif()
     string(REGEX MATCH "id: (.*) or.*${API_LEVEL_${T}}" ALT_MATCH ${ALT_OUTPUT})
     set(ANDROID_TARGET "${CMAKE_MATCH_1}")
+    set (CMAKE_GENERATED_COMMAND "${CMAKE_GENERATED_COMMAND} -DANDROID_TARGET=${ANDROID_TARGET} -DCMAKE_TOOLCHAIN_FILE=${KRAL_PATH}/android-cmake/toolchain/android.toolchain.cmake -DANDROID_NDK=$ENV{NDK} -DANDROID_API_LEVEL=${API_LEVEL_${T}}")
 endif()
+set (CMAKE_GENERATED_COMMAND "${CMAKE_GENERATED_COMMAND} -DPACKAGES=\"${PACKAGE_DIRS}\" -DCMAKE_BUILD_TYPE=Debug -DKRAL_PATH=\"${KRAL_PATH}\" -DPLATFORM=\"${PLATFORM_${T}}\" -G \"${PROJECT_TYPE_${T}}\" \"${PROJECT_DIR_${T}}\" -DCUSTOM_COMPILER_OPTS=\"\"")
 
 if (GENERATE)
     file(REMOVE_RECURSE "${PROJECTS_ROOT_DIR}/${BUILD_DIR_${T}}")
@@ -47,6 +48,7 @@ if (GENERATE)
     exec_program ("${CMAKE_COMMAND}" ARGS -E chdir ${PROJECTS_ROOT_DIR}/${BUILD_DIR_${T}} ${CMAKE_GENERATED_COMMAND})
 elseif (UPDATE)
     exec_program ("${CMAKE_COMMAND}" ARGS -E chdir ${PROJECTS_ROOT_DIR}/${BUILD_DIR_${T}} 
+
             \"${CMAKE_COMMAND}\" ${CUSTOM_ARGS_${T}} -DPACKAGES=\"${PACKAGE_DIRS}\" -DCMAKE_BUILD_TYPE=Debug -DKRAL_PATH=\"${KRAL_PATH}\" -DPLATFORM=\"${PLATFORM_${T}}\" -G \"${PROJECT_TYPE_${T}}\" \"${PROJECT_DIR_${T}}\" -DCUSTOM_COMPILER_OPTS=\"\")
 elseif (COMPILE)
     exec_program ("${CMAKE_COMMAND}" ARGS -E chdir ${PROJECTS_ROOT_DIR}/${BUILD_DIR_${T}} 
