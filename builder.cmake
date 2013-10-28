@@ -26,6 +26,10 @@ Available targets:")
     message (FATAL_ERROR ${MSG})
 endif ()
 
+if ("${TARGET_NAME_${T}}" STREQUAL "")
+    message (FATAL_ERROR "Target ${T} is not defined. Are you sure you spelled the name right?")
+endif ()
+
 set (CMAKE_GENERATED_COMMAND "\"${CMAKE_COMMAND}\" ${CUSTOM_ARGS_${T}} ")
 if ("${PLATFORM_${T}}" STREQUAL "android")
     # Determine android target number
