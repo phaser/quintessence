@@ -17,7 +17,7 @@
 #ifndef PACKAGES_QUI_QUIUTILS_DEV_INCLUDE_QUI_CPP11COMPAT_H_
 #define PACKAGES_QUI_QUIUTILS_DEV_INCLUDE_QUI_CPP11COMPAT_H_
 
-#if defined(PLATFORM_WIN32) || defined(PLATFORM_OSX) || defined(PLATFORM_IOS)
+#if defined(PLATFORM_WIN32) || defined(PLATFORM_OSX) || defined(PLATFORM_IOS) || defined(PLATFORM_QT5)
 #include <unordered_map>
 #include <memory>
 namespace cpp0x = std;

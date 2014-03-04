@@ -24,3 +24,11 @@ projects
 
 CMakeFiles
 CMakeCache.txt
+
+packages/gtest-entrypoint/dev/lib
+thirdparty/glm/0.9.3.3/lib
+thirdparty/gtest/1.6.0/lib
+thirdparty/libzip/0.9.3/lib
+thirdparty/lodepng/20120729/lib
+thirdparty/tinyxml/2.6.2/lib
+thirdparty/zlib/1.2.5/lib

@@ -41,6 +41,7 @@ void StandardGameEntry::setWindow(GLWindow win)
 }
 }  // namespace qui
 
+#ifndef PLATFORM_QT5
 /* The entry point of the application */
 #ifdef PLATFORM_OSX
 int main(int /* argc */, char** /* argv */)
@@ -132,3 +133,4 @@ int SDL_main(int argc, char* argv[])
     SDL_Quit();
     return 0;
 }
+#endif  // PLATFORM_QT5
