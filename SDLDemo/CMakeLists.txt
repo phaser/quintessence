@@ -25,7 +25,7 @@ add_module_dependency(${PROJ_NAME} "QUIInput" "dev")
 add_module_dependency(${PROJ_NAME} "QUIReflection" "dev")
 add_module_dependency(${PROJ_NAME} "QUIResourceLoader" "dev")
 add_module_dependency(${PROJ_NAME} "QUIGameEntry" "dev")
-add_module_dependency(${PROJ_NAME} "QUIMemoryUtils" "dev")
+#add_module_dependency(${PROJ_NAME} "QUIMemoryUtils" "dev")
 
 build_module(${PROJ_NAME} ${BUILD_TYPE})
 

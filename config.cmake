@@ -2,7 +2,7 @@ cmake_minimum_required (VERSION 2.8)
 include (KRAL/config.cmake)
 
 set (KRAL_PATH      "${CMAKE_CURRENT_LIST_DIR}/KRAL/")
-set (PACKAGE_DIRS   "${CMAKE_CURRENT_LIST_DIR}/packages\;${CMAKE_CURRENT_LIST_DIR}/thirdparty")
+set (PACKAGE_DIRS   "${CMAKE_CURRENT_LIST_DIR}/packages;${CMAKE_CURRENT_LIST_DIR}/thirdparty")
 set (PROJECTS_ROOT_DIR  "${CMAKE_CURRENT_LIST_DIR}/projects")
 
 # Default target
