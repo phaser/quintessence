@@ -44,7 +44,7 @@ endmacro ()
 # ============================================================================
 # Main script
 # ============================================================================
-if ("${T}" STREQUAL "")
+if ("${T}" STREQUAL "" AND "${N}" STREQUAL "")
     set (counter "0")
     set (MSG "USAGE: cmake -DT=[target] -D[BUILD_OPTION]=1 -P build.cmake
 BUILD_OPTION = GENERATE | COMPILE | UPDATE | BUILD | LIST
@@ -53,11 +53,24 @@ Available targets:")
 
     foreach (target ${TARGETS})
         math (EXPR counter "${counter} + 1")
-        set (TARGET_INFO_${target} "${counter}. [${PLATFORM_${target}}]    ${TARGET_NAME_${target}}")
+        string (LENGTH "${PLATFORM_${target}}" PTLEN)
+        math (EXPR PTSIZE "12 - ${PTLEN}")
+        set (TMPTARGET "[${PLATFORM_${target}}]")
+        foreach (num RANGE ${PTSIZE})
+            set (TMPTARGET "${TMPTARGET} ")
+        endforeach()
+        set (TARGET_INFO_${target} "${counter}. ${TMPTARGET}${TARGET_NAME_${target}}")
         set (MSG "${MSG}
     ${TARGET_INFO_${target}}")
     endforeach ()     
     message (FATAL_ERROR ${MSG})
+endif ()
+
+# Find the target
+if (NOT "${N}" STREQUAL "")
+    math (EXPR N "${N} - 1")
+    list (GET TARGETS ${N} T)
+    message ("Start building ${T}...")
 endif ()
 
 if ("${TARGET_NAME_${T}}" STREQUAL "")

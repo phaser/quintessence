@@ -396,6 +396,9 @@ endmacro(android_build_project_post_build)
 macro(build_module)
     SET (KRAL_MODULES_ADDED "" CACHE INTERNAL "Modules used by this project" FORCE)
     SET (NAME ${ARGV0})
+    if (NOT "${ARGV1}" STREQUAL "" AND "${BUILD_OPTION}" STREQUAL "")
+        set (BUILD_OPTION "${ARGV1}")
+    endif ()
 	MESSAGE (STATUS "Creating module ${NAME}")
 
     # Execute other Macros
@@ -434,30 +437,31 @@ macro(build_module)
 			add_library(${NAME}_LIB ${${NAME}_F_INCLUDE} ${${NAME}_F_SOURCES} ${${NAME}_plaf_F_SOURCES})
             add_dependencies(KRAL_END_OF_BUILD_TARGET ${NAME} ${NAME}_LIB)
 	        TARGET_LINK_LIBRARIES(${NAME} ${NAME}_LIB)
-            # if RUNTIME_DIR isn't set then give it some default values
-            if ("${RUNTIME_DIR}" STREQUAL "")
-                if (ANDROID)
-                    # on android we have to give it a static value because
-                    # we can't use the library location because the library
-                    # isn't generated in the binary directory, we copy it
-                    # afterwards
-                    set (RUNTIME_DIR "${CMAKE_BINARY_DIR}")
-                    set (RUNTIME_SUFFIX "/android")
-                else ()
-                    get_target_property(E_MODULE_PATH ${NAME} LOCATION_${CMAKE_BUILD_TYPE})
-                    string(REPLACE "$(EFFECTIVE_PLATFORM_NAME)" "" E_MODULE_PATH ${E_MODULE_PATH})
-                    get_filename_component(E_MODULE_PATH ${E_MODULE_PATH} PATH)
-                    set (RUNTIME_DIR "${E_MODULE_PATH}")
-                    set (RUNTIME_SUFFIX "")
-                endif ()
-                message (STATUS "RUNTIME_DIR was set to default value: ${RUNTIME_DIR}${RUNTIME_SUFFIX}")
-            endif ()
             append_to_runtime_files(${CMAKE_CURRENT_LIST_DIR}/runtime)	
 			add_tests(${NAME} ${NAME}_LIB)
 			add_tests(${NAME} ${NAME}_LIB "integration_tests")
 		ELSE (DEFINED TESTS)
 			add_executable (${NAME} ${BUILD_OPTION} ${${NAME}_F_INCLUDE} ${${NAME}_F_SOURCES} ${${NAME}_plaf_F_SOURCES})
 		ENDIF (DEFINED TESTS)
+        # if RUNTIME_DIR isn't set then give it some default values
+        if ("${RUNTIME_DIR}" STREQUAL "")
+            if (ANDROID)
+                # on android we have to give it a static value because
+                # we can't use the library location because the library
+                # isn't generated in the binary directory, we copy it
+                # afterwards
+                set (RUNTIME_DIR "${CMAKE_BINARY_DIR}")
+                set (RUNTIME_SUFFIX "/android")
+            else ()
+                get_target_property(E_MODULE_PATH ${NAME} LOCATION_${CMAKE_BUILD_TYPE})
+                message ("MODULE_PATH: ${E_MODULE_PATH}")
+                string(REPLACE "$(EFFECTIVE_PLATFORM_NAME)" "" E_MODULE_PATH ${E_MODULE_PATH})
+                get_filename_component(E_MODULE_PATH ${E_MODULE_PATH} PATH)
+                set (RUNTIME_DIR "${E_MODULE_PATH}")
+                set (RUNTIME_SUFFIX "")
+            endif ()
+            message (STATUS "RUNTIME_DIR was set to default value: ${RUNTIME_DIR}${RUNTIME_SUFFIX}")
+        endif ()
 	endif (ANDROID)
     apply_global_target_properties(${NAME})
     if (ANDROID)
