@@ -10,6 +10,20 @@ set (PLATFORM_DEFAULT           "linux")
 set (PROJECT_TYPE_DEFAULT       "Unix Makefiles")
 
 # === TARGET
+set (CTARGET "SDLDemo-qt")
+list (APPEND TARGETS ${CTARGET})
+copy_target ("DEFAULT" ${CTARGET})
+set (TARGET_NAME_${CTARGET}     "${CTARGET}")
+set (PLATFORM_${CTARGET}        "qt5")
+set (PROJECT_DIR_${CTARGET}     "${CMAKE_CURRENT_LIST_DIR}/SDLDemo")
+set (BUILD_DIR_${CTARGET}       "SDLDemo")
+set (PROJECT_TYPE_${CTARGET}    "Unix Makefiles")
+set (CUSTOM_ARGS_${CTARGET}     "-Wdev")
+set (CUSTOM_ARGS_${CTARGET}     "${CUSTOM_ARGS_${CTARGET}} -DIOS_SDK_PATH=\"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs\"")
+set (CUSTOM_ARGS_${CTARGET}     "${CUSTOM_ARGS_${CTARGET}} -DTARGETSDK=MacOSX10.8.sdk ")
+set (BUILD_TYPE_${CTARGET}      "debug")
+
+# === TARGET
 set (CTARGET "SDLDemo-osx")
 list (APPEND TARGETS ${CTARGET})
 copy_target ("DEFAULT" ${CTARGET})
@@ -24,6 +38,7 @@ set (CUSTOM_ARGS_${CTARGET}     "${CUSTOM_ARGS_${CTARGET}} -DIOS_SDK_PATH=\"/App
 set (CUSTOM_ARGS_${CTARGET}     "${CUSTOM_ARGS_${CTARGET}} -DTARGETSDK=MacOSX10.8.sdk ")
 set (CUSTOM_ARGS_${CTARGET}     "${CUSTOM_ARGS_${CTARGET}} -DDEST_PREFIX=Debug ")
 #set (CUSTOM_ARGS_${CTARGET}     "${CUSTOM_ARGS_${CTARGET}} -DTESTS=True ")
+set (BUILD_TYPE_${CTARGET}      "debug")
 
 # == TARGET
 set (CTARGET "SDLDemo-iossim")
@@ -35,10 +50,9 @@ set (PROJECT_DIR_${CTARGET}     "${CMAKE_CURRENT_LIST_DIR}/SDLDemo")
 set (BUILD_DIR_${CTARGET}       "SDLDemo")
 set (PROJECT_TYPE_${CTARGET}    "Xcode")
 set (CUSTOM_ARGS_${CTARGET}     "-Wdev")
-set (CUSTOM_ARGS_${CTARGET}     "${CUSTOM_ARGS_${CTARGET}} -DRUNTIME_SUFFIX=/Debug-iphonesimulator/SDLDemo.app")
-set (CUSTOM_ARGS_${CTARGET}     "${CUSTOM_ARGS_${CTARGET}} -DDEST_PREFIX=Debug-iphonesimulator ")
 set (CUSTOM_ARGS_${CTARGET}     "${CUSTOM_ARGS_${CTARGET}} -DIOS_SDK_PATH=\"/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs\"")
-set (CUSTOM_ARGS_${CTARGET}     "${CUSTOM_ARGS_${CTARGET}} -DTARGETSDK=iPhoneSimulator6.1.sdk ")
+set (CUSTOM_ARGS_${CTARGET}     "${CUSTOM_ARGS_${CTARGET}} -DTARGETSDK=iPhoneSimulator7.0.sdk ")
+set (BUILD_TYPE_${CTARGET}      "debug")
 
 # == TARGET
 set (CTARGET "SDLDemo-android")
@@ -55,6 +69,7 @@ set (CPU_TARGET_${CTARGET} "armeabi")
 set (CUSTOM_ARGS_${CTARGET}     "-Wdev")
 set (CUSTOM_ARGS_${CTARGET}     "${CUSTOM_ARGS_${CTARGET}} -DANDROID_APP_NAME=\"SDLDemo\" ")
 set (CUSTOM_ARGS_${CTARGET}     "${CUSTOM_ARGS_${CTARGET}} -DANDROID_APP_PACKAGE=\"ro.qui.apps\"")
+set (BUILD_TYPE_${CTARGET}      "debug")
 
 # === TARGET
 set (CTARGET "SDLDemo-win32")
@@ -66,3 +81,5 @@ set (PROJECT_DIR_${CTARGET}     "${CMAKE_CURRENT_LIST_DIR}/SDLDemo")
 set (BUILD_DIR_${CTARGET}       "SDLDemo")
 set (PROJECT_TYPE_${CTARGET}    "Visual Studio 11")
 set (CUSTOM_ARGS_${CTARGET}     "-Wdev -DRUNTIME_SUFFIX=/Debug/SDLDemo.app ")
+set (BUILD_TYPE_${CTARGET}      "debug")
+
