@@ -94,11 +94,7 @@ if ("${PLATFORM_${T}}" STREQUAL "android")
 endif()
 set (CMAKE_GENERATED_COMMAND "${CMAKE_GENERATED_COMMAND} -DANDROID_ASSETS=\"${ASSETS_${T}}\" -DNEW_CMAKE=1 -DPACKAGES=\"${PACKAGE_DIRS}\" -DCMAKE_BUILD_TYPE=${BUILD_TYPE_${T}} -DKRAL_PATH=\"${KRAL_PATH}\" -DPLATFORM=\"${PLATFORM_${T}}\" -G \"${PROJECT_TYPE_${T}}\" \"${PROJECT_DIR_${T}}\"")
 
-<<<<<<< HEAD
 if (GENERATE OR G)
-=======
-if (GENERATE)
->>>>>>> 53d8f63f54113d79cb7e960966fb6bd7f460f0d8
     exec_program("\"${CMAKE_COMMAND}\" -E remove_directory ${PROJECTS_ROOT_DIR}/${BUILD_DIR_${T}}" RETURN_VALUE GCRV)
 
     if (NOT "${GCRV}" STREQUAL "0")
@@ -121,7 +117,6 @@ if (GENERATE)
         file (APPEND ${CMLFILE} "set (PLATFORM ${PLATFORM_${T}} CACHE INTERNAL PLATFORM FORCE)\n")
         file (APPEND ${CMLFILE} "set (CMAKE_BUILD_TYPE ${BUILD_TYPE_${T}} CACHE INTERNAL BUILD_TYPE FORCE)\n")
         file (APPEND ${CMLFILE} "set (PACKAGES ${PACKAGE_DIRS} CACHE INTERNAL PACKAGE_DIRS FORCE)\n")
-<<<<<<< HEAD
         file (APPEND ${CMLFILE} "set (NEW_CMAKE True)\n")
         file (APPEND ${CMLFILE} "add_subdirectory (${PROJECT_DIR_${T}})")
     endif ()
@@ -133,18 +128,6 @@ elseif (COMPILE OR C)
 elseif (LIST OR L)
     print_target(${T})
 elseif (BUILD OR B)
-=======
-        file (APPEND ${CMLFILE} "add_subdirectory (${PROJECT_DIR_${T}})")
-    endif ()
-elseif (UPDATE)
-    exec_program ("${CMAKE_COMMAND}" ARGS -E chdir ${PROJECTS_ROOT_DIR}/${BUILD_DIR_${T}} "${CMAKE_GENERATED_COMMAND}")
-elseif (COMPILE)
-    exec_program ("${CMAKE_COMMAND}" ARGS -E chdir ${PROJECTS_ROOT_DIR}/${BUILD_DIR_${T}} 
-            \"${CMAKE_COMMAND}\" --build .)
-elseif (LIST)
-    print_target(${T})
-elseif (BUILD)
->>>>>>> 53d8f63f54113d79cb7e960966fb6bd7f460f0d8
     file(REMOVE_RECURSE "${PROJECTS_ROOT_DIR}/${BUILD_DIR_${T}}")
     file(MAKE_DIRECTORY "${PROJECTS_ROOT_DIR}/${BUILD_DIR_${T}}")
  
