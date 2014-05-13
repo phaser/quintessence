@@ -159,6 +159,12 @@ macro(list_files NAME)
 
 endmacro(list_files)
 
+macro(include_directory_if_exists PATH)
+	IF (EXISTS "${PATH}")
+		include_directories("${PATH}")
+	ENDIF (EXISTS "${PATH}")
+endmacro(include_directory_if_exists)
+
 # make_library is used in packaged modules to add a library
 # the macro assumes a standard directory layout with include files
 # placed in include and source files placed in source/common for
@@ -309,9 +315,6 @@ macro(build_module)
 		    ENDIF(EXISTS "${CMAKE_CURRENT_LIST_DIR}/tests")
 		ENDIF(DEFINED TESTS)
 	endif (ANDROID)
-	IF (IOS)
-		set_property( TARGET ${NAME} PROPERTY XCODE_ATTRIBUTE_IPHONEOS_DEPLOYMENT_TARGET 4.3 )
-	ENDIF (IOS)
     COPY_RUNTIME_FILES()
     apply_global_target_properties(${NAME})
     CLEAR_CACHE()
@@ -498,7 +501,7 @@ macro(export_ios_framework)
     IF (${FRAMEWORK_${LIF_NAME}} STREQUAL FRAMEWORK_${LIF_NAME}-NOTFOUND)
         MESSAGE (ERROR ": Framework ${LIF_NAME} not found")
     ELSE (${FRAMEWORK_${LIF_NAME}} STREQUAL FRAMEWORK_${LIF_NAME}-NOTFOUND)
-        SET(EXPORTED_${LIF_PROJ_NAME}_LIB "${FRAMEWORK_${LIF_NAME}}" CACHE INTERNAL ${PROJ_NAME} FORCE)
+        export_library(${LIF_PROJ_NAME} ${FRAMEWORK_${LIF_NAME}})
         MESSAGE (STATUS "Framework ${LIF_NAME} found at ${FRAMEWORK_${LIF_NAME}}")
     ENDIF (${FRAMEWORK_${LIF_NAME}} STREQUAL FRAMEWORK_${LIF_NAME}-NOTFOUND)
 endmacro()
