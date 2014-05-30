@@ -27,7 +27,11 @@ add_module_dependency(${PROJ_NAME} "QUIGameEntry" "dev")
 add_module_dependency(${PROJ_NAME} "mongoose" "5.3")
 #add_module_dependency(${PROJ_NAME} "QUIMemoryUtils" "dev")
 
-build_module(${PROJ_NAME} ${BUILD_TYPE})
+if (SHARED_LIB)
+    make_shared_library(${PROJ_NAME})
+else ()
+    build_module(${PROJ_NAME} ${BUILD_TYPE})
+endif ()
 
 link_module_dependencies(${PROJ_NAME})
 

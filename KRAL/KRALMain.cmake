@@ -486,6 +486,23 @@ macro(export_module_dependency PNAME NAME VERSION)
 endmacro()
 
 # add_module_dependency adds a directory and links the target module with the PNAME module.
+macro(add_module_includes PNAME NAME VERSION)
+	MESSAGE (STATUS "${PNAME}: Adding module includes ${NAME} [${VERSION}]")
+	SET (PACKAGE_EXISTS False)
+	FOREACH (package ${PACKAGES})
+    	IF(EXISTS "${package}/${NAME}/${VERSION}")
+    	    SET (PACKAGE_EXISTS True)
+			include_directory_if_exists("${package}/${NAME}/${VERSION}/include")
+			include_directory_if_exists("${package}/${NAME}/${VERSION}/include/${PLATFORM}")
+	    ENDIF()
+	ENDFOREACH (package)
+	
+	IF (NOT PACKAGE_EXISTS)
+        MESSAGE(FATAL_ERROR "PACKAGES: ${PACKAGES}\n: Package ${NAME} doesn't exist in any package location!!!")
+	ENDIF (NOT PACKAGE_EXISTS)
+endmacro(add_module_includes)
+
+# add_module_dependency adds a directory and links the target module with the PNAME module.
 macro(add_module_dependency PNAME NAME VERSION)
 	MESSAGE (STATUS "${PNAME}: Adding module dependency ${NAME} [${VERSION}]")
 	SET (PACKAGE_EXISTS False)
