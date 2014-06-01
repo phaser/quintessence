@@ -69,8 +69,10 @@ set (CUSTOM_ARGS_${CTARGET}     "-Wdev")
 set (CUSTOM_ARGS_${CTARGET}     "${CUSTOM_ARGS_${CTARGET}} -DRUNTIME_DIR=debug")
 set (CUSTOM_ARGS_${CTARGET}     "${CUSTOM_ARGS_${CTARGET}} -DIOS_SDK_PATH=\"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs\"")
 set (CUSTOM_ARGS_${CTARGET}     "${CUSTOM_ARGS_${CTARGET}} -DTARGETSDK=MacOSX10.8.sdk ")
+set (CUSTOM_ARGS_${CTARGET}     "${CUSTOM_ARGS_${CTARGET}} -DQT5=1 ")
 #set (CUSTOM_ARGS_${CTARGET}     "${CUSTOM_ARGS_${CTARGET}} -DTESTS=True ")
 set (BUILD_TYPE_${CTARGET}      "debug")
+set (GENERATE_CMAKELISTS_${CTARGET} True)
 
 # == TARGET
 set (CTARGET "SDLDemo-iossim")

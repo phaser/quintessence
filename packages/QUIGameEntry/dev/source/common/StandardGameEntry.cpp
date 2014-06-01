@@ -41,6 +41,34 @@ void StandardGameEntry::setWindow(GLWindow win)
 }
 }  // namespace qui
 
+/* C Interface for dynamic game loading */
+void gameInit()
+{
+    qui::game->init();
+}
+
+void gameUpdate(uint64_t dt)
+{
+    qui::game->update(dt);
+}
+
+void gamePaint()
+{
+    qui::game->paint();
+}
+
+void gameExit()
+{
+    qui::game->cleanup();
+}
+
+void gameSetWindowSize(uint16_t w, uint16_t h)
+{
+    qui::game->getWindow().setSize(w, h);
+    qui::game->onSystemEvent(WINDOW_RESIZED);
+}
+/* End C Interface */
+
 #ifndef PLATFORM_QT5
 /* The entry point of the application */
 #ifdef PLATFORM_OSX

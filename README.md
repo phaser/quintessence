@@ -1,5 +1,6 @@
 compile
-============
+=======
+
     cmake -P KRAL/builder.cmake
 
 Mac OS X

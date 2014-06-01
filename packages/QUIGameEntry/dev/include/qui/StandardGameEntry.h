@@ -20,6 +20,15 @@
 #include <qui/cpp11compat.h>
 #include <stdint.h>
 
+extern "C"
+{
+    void gameInit();
+    void gameUpdate(uint64_t dt);
+    void gamePaint();
+    void gameExit();
+    void gameSetWindowSize(uint16_t w, uint16_t h);
+}
+
 namespace qui
 {
 enum SystemEvent
