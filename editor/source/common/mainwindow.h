@@ -22,6 +22,9 @@ private slots:
 private:
     Ui::MainWindow *ui;
     OpenGLWidget *glWidget;
+
+    template <typename T>
+    T getFunctionPointer(void* handle, const char* functionName);
 };
 
 #endif  // PACKAGES_QUI_QUIGAMEENTRY_DEV_SOURCE_QT5_MAINWINDOW_H_

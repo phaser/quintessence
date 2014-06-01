@@ -17,6 +17,7 @@
 #ifndef PACKAGES_QUI_QUIGAMEENTRY_DEV_SOURCE_QT5_OPENGLWIDGET_H_
 #define PACKAGES_QUI_QUIGAMEENTRY_DEV_SOURCE_QT5_OPENGLWIDGET_H_
 #include <QGLWidget>
+#include "./GameInterface.h"
 
 namespace qui
 {
@@ -26,10 +27,11 @@ namespace qui
 class OpenGLWidget : public QGLWidget
 {
  public:
-    explicit OpenGLWidget(const QGLFormat& format);
+    explicit OpenGLWidget(const QGLFormat& format, const GameInterface& gi);
     ~OpenGLWidget();
  private:
     qui::Timer* timer;
+    GameInterface gi;
 
     void initializeGL();
     void paintGL();

@@ -64,8 +64,8 @@ void gameExit()
 
 void gameSetWindowSize(uint16_t w, uint16_t h)
 {
-    qui::game->getWindow().setSize(w, h);
-    qui::game->onSystemEvent(WINDOW_RESIZED);
+    qui::game->getWindow().setSize(glm::vec2(w, h));
+    qui::game->onSystemEvent(qui::WINDOW_RESIZED);
 }
 /* End C Interface */
 
