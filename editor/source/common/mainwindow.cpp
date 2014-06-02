@@ -5,7 +5,7 @@
 #include <dlfcn.h>
 #include <qui/log.h>
 
-#define LIB_NAME "/Users/cristi/projects/quintessence/projects/SDLDemo/Debug/libSDLDemo.dylib"
+#include <QFileDialog>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -20,12 +20,26 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_pushButton_clicked()
+template <typename T>
+T MainWindow::getFunctionPointer(void* handle, const char* functionName)
 {
-    void* handle = dlopen(LIB_NAME, RTLD_LAZY);
+    T func = (T) dlsym(handle, functionName);
+    const char* dlsym_error = dlerror();
+    if (dlsym_error)
+    {
+        LOG(LERROR) << "Could not get function pointer for " << functionName << "!";
+        dlclose(handle);
+        return nullptr;
+    }
+    return func;
+}
+
+void MainWindow::openGame(const char* gamePath)
+{
+    void* handle = dlopen(gamePath, RTLD_LAZY);
     if (!handle)
     {
-        LOG(FATAL) << "Could not open " LIB_NAME "!";
+        LOG(FATAL) << "Could not open " << gamePath << "!";
         return;
     }
 
@@ -55,28 +69,23 @@ void MainWindow::on_pushButton_clicked()
     {
         return;
     }
-    
+
     QGLFormat format;
     format.setVersion(3, 1);
     format.setProfile(QGLFormat::CoreProfile);
     format.setSampleBuffers(true);
-    
+
     glWidget = new OpenGLWidget(format, gi);
     glWidget->setMinimumSize(960, 640);
     glWidget->setMaximumSize(960, 640);
     this->ui->scrollArea->setWidget(glWidget);
 }
 
-template <typename T>
-T MainWindow::getFunctionPointer(void* handle, const char* functionName)
+void MainWindow::on_actionOpen_Game_triggered()
 {
-    T func = (T) dlsym(handle, functionName);
-    const char* dlsym_error = dlerror();
-    if (dlsym_error)
+    QString libfile = QFileDialog::getOpenFileName(this, tr("Select game library file"), ".");
+    if (libfile.isNull() == false)
     {
-        LOG(LERROR) << "Could not get function pointer for " << functionName << "!";
-        dlclose(handle);
-        return nullptr;
+        openGame(libfile.toUtf8().data());
     }
-    return func;
 }
