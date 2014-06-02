@@ -20,6 +20,10 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::on_pushButton_clicked()
+{
+}
+
 template <typename T>
 T MainWindow::getFunctionPointer(void* handle, const char* functionName)
 {
