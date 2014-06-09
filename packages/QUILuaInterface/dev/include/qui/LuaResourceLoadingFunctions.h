@@ -21,4 +21,3 @@ OOLUA_CLASS_NO_BASES(LuaResourceLoadingFunctions)
     OOLUA_MEM_FUNC(bool, material, const char*, unsigned int, unsigned int)
     OOLUA_MEM_FUNC(bool, font, const char*, const char*, const char*)
 OOLUA_CLASS_END
-
