@@ -15,7 +15,7 @@ EXPORT_OOLUA_FUNCTIONS_5_NON_CONST(LuaResourceLoadingFunctions
                                  , material
                                  , font)
 EXPORT_OOLUA_FUNCTIONS_0_CONST(LuaResourceLoadingFunctions)
-                                   
+
 unsigned int LuaResourceLoadingFunctions::texture(const char* texture)
 {
     qui::TextureManager tm;

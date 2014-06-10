@@ -55,17 +55,17 @@ bool LoadingScreen::init()
     delete list;
     */
     
-    std::unique_ptr<OOLUA::Script> lScript(new OOLUA::Script);
+    OOLUA::Script s;
     LuaResourceLoadingFunctions* lrlf = new LuaResourceLoadingFunctions;
     qui::VirtualFS fs;
-    lScript->register_class<LuaResourceLoadingFunctions>();
     cpp0x::shared_ptr<char> script_text = fs.getFileContentsAsText("assets/resource_list.lua");
-    LOG(INFO) << script_text.get();
-    lScript->run_chunk(script_text.get());
-    bool result = lScript->call("resources", &lrlf);
+    s.run_chunk(script_text.get());
+    s.register_class<LuaResourceLoadingFunctions>(lrlf);
+    bool result = s.call("resources", lrlf);
     if (!result)
     {
-        LOG(LERROR) << "assets/resource_list.lua script execution failed";
+        LOG(LERROR) << "assets/resource_list.lua script execution failed"
+                    << "\n" << OOLUA::get_last_error(s.get_ptr());
     }
     delete lrlf;
     return scene->init();
