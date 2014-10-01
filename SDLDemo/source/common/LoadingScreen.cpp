@@ -23,10 +23,11 @@
 #include <qui/cpp11compat.h>
 #include <qui/text/FontManager.h>
 #include <qui/TextureAtlas.h>
-#include <qui/LuaResourceLoadingFunctions.h>
-#include <oolua.h>
 #include <qui/VirtualFS.h>
 #include <qui/log.h>
+#include <qui/ReflectionManager.h>
+#include <qui/resourceloader/LoadList.h>
+#include <qui/resourceloader/Loader.h>
 
 LoadingScreen::LoadingScreen(const qui::StandardGameEntry& game)
     : IGameScreen(game)
@@ -40,7 +41,6 @@ LoadingScreen::~LoadingScreen()
 
 bool LoadingScreen::init()
 {
-    /*
     qui::ReflectionManager refMgr;
     refMgr.setTypeMappings<qui::resourceloader::TextureDescriptor>();
     refMgr.setTypeMappings<qui::resourceloader::ShaderDescriptor>();
@@ -53,22 +53,7 @@ bool LoadingScreen::init()
     qui::resourceloader::LoadList *list = loader.loadList("assets/resource_list.xml");
     loader.loadResources(list);
     delete list;
-    */
-    
-    OOLUA::Script s;
-    LuaResourceLoadingFunctions* lrlf = new LuaResourceLoadingFunctions;
-    qui::VirtualFS fs;
-    cpp0x::shared_ptr<char> script_text = fs.getFileContentsAsText("assets/resource_list.lua");
-    s.run_chunk(script_text.get());
-    s.register_class<LuaResourceLoadingFunctions>(lrlf);
-    bool result = s.call("resources", lrlf);
-    if (!result)
-    {
-        LOG(LERROR) << "assets/resource_list.lua script execution failed"
-                    << "\n" << OOLUA::get_last_error(s.get_ptr());
-    }
-    delete lrlf;
-    return scene->init();
+    return true;
 }
 
 void LoadingScreen::update(uint64_t /* dt */)

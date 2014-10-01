@@ -35,8 +35,20 @@ set (PROJECT_TYPE_${CTARGET}    "Xcode")
 set (CUSTOM_ARGS_${CTARGET}     "-Wdev")
 set (CUSTOM_ARGS_${CTARGET}     "${CUSTOM_ARGS_${CTARGET}} -DRUNTIME_DIR=debug")
 set (CUSTOM_ARGS_${CTARGET}     "${CUSTOM_ARGS_${CTARGET}} -DIOS_SDK_PATH=\"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs\"")
-set (CUSTOM_ARGS_${CTARGET}     "${CUSTOM_ARGS_${CTARGET}} -DTARGETSDK=MacOSX10.8.sdk ")
+set (CUSTOM_ARGS_${CTARGET}     "${CUSTOM_ARGS_${CTARGET}} -DTARGETSDK=MacOSX10.9.sdk ")
 #set (CUSTOM_ARGS_${CTARGET}     "${CUSTOM_ARGS_${CTARGET}} -DTESTS=True ")
+set (BUILD_TYPE_${CTARGET}      "debug")
+
+# === TARGET
+set (CTARGET "SDLDemo-web")
+list (APPEND TARGETS ${CTARGET})
+copy_target ("DEFAULT" ${CTARGET})
+set (TARGET_NAME_${CTARGET}     "${CTARGET}")
+set (PLATFORM_${CTARGET}        "web")
+set (PROJECT_DIR_${CTARGET}     "${CMAKE_CURRENT_LIST_DIR}/SDLDemo")
+set (BUILD_DIR_${CTARGET}       "SDLDemo")
+set (PROJECT_TYPE_${CTARGET}    "Xcode")
+set (CUSTOM_ARGS_${CTARGET}     "-Wdev")
 set (BUILD_TYPE_${CTARGET}      "debug")
 
 # === TARGET
