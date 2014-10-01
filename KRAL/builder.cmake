@@ -79,7 +79,7 @@ endif ()
 
 parse_custom_args(${T})
 
-set (CMAKE_GENERATED_COMMAND "\"${CMAKE_COMMAND}\" ${CUSTOM_ARGS_${T}} ")
+set (CMAKE_GENERATED_COMMAND "\"${CMAKE_COMMAND}\" ${CUSTOM_ARGS_${T}} ${CUSTOM_ARGS_PD_${T}} ")
 if ("${PLATFORM_${T}}" STREQUAL "android")
     # Determine android target number
     set (ANDROID_BINARY "android")

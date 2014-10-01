@@ -27,6 +27,10 @@ add_module_dependency(${PROJ_NAME} "QUIResourceLoader" "dev")
 add_module_dependency(${PROJ_NAME} "QUIGameEntry" "dev")
 #add_module_dependency(${PROJ_NAME} "QUIMemoryUtils" "dev")
 
+if (WEB)
+    SET(CMAKE_EXECUTABLE_SUFFIX ".html")
+endif()
+
 if (SHARED_LIB)
     make_shared_library(${PROJ_NAME})
 else ()
