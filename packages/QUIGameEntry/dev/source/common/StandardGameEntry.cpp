@@ -73,6 +73,8 @@ void gameSetWindowSize(uint16_t w, uint16_t h)
 /* The entry point of the application */
 #ifdef PLATFORM_OSX
 int main(int /* argc */, char** /* argv */)
+#elif defined(PLATFORM_WEB)
+extern "C" int main(int, char**)
 #else
 int SDL_main(int argc, char* argv[])
 #endif
