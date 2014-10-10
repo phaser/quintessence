@@ -15,9 +15,13 @@
 //    along with QUIGameEntry.  If not, see <http://www.gnu.org/licenses/>.
 #include <qui/StandardGameEntry.h>
 #include <iostream>
+#ifndef PLATFORM_WEB
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_main.h>
 #include <SDL2/SDL_mouse.h>
+#else
+#include <SDL/SDL.h>
+#endif
 #include <qui/InputInterface.h>
 #include <qui/TouchInputEvent.h>
 #include <qui/log.h>
@@ -78,6 +82,7 @@ extern "C" int main(int, char**)
 #else
 int SDL_main(int argc, char* argv[])
 #endif
+#ifndef PLATFORM_WEB
 {
     using qui::input::InputInterface;
     using qui::input::TouchInputEvent;
@@ -163,4 +168,40 @@ int SDL_main(int argc, char* argv[])
     SDL_Quit();
     return 0;
 }
+#else
+{
+    using qui::input::InputInterface;
+    using qui::input::TouchInputEvent;
+    LOG(INFO) << "App start.";
+
+    SDL_Init(SDL_INIT_VIDEO);
+    qui::game->init();
+    SDL_Surface *screen = SDL_SetVideoMode(qui::game->getWindow().getSize().x
+                                         , qui::game->getWindow().getSize().y
+                                         , 32
+                                         , SDL_SWSURFACE);
+
+    qui::Timer timer;
+    bool quit = false;
+    while (!quit)
+    {
+        qui::game->update(timer.getDeltaTime());
+        qui::game->paint();
+        SDL_Flip(screen); 
+    }
+/*
+ if (SDL_MUSTLOCK(screen)) SDL_LockSurface(screen);
+  for (int i = 0; i < 256; i++) {
+    for (int j = 0; j < 256; j++) {
+      // alpha component is actually ignored, since this is to the screen
+      *((Uint32*)screen->pixels + i * 256 + j) = SDL_MapRGBA(screen->format, i, j, 255-i, (i+j) % 255);
+    }
+  }
+  if (SDL_MUSTLOCK(screen)) SDL_UnlockSurface(screen);
+*/
+  qui::game->cleanup();
+  SDL_Quit();
+  return 0;
+}
+#endif  // PLATFORM_WEB
 #endif  // PLATFORM_QT5
