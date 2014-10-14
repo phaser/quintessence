@@ -29,7 +29,7 @@ endmacro(eval)
 # we have to do this manually. This macro should do everything in this regard
 # it is in the private interface because it is automatically called from within KRALMain.txt
 # the user shouldn't have the need to call it.
-MACRO (generate_ndkgdb_config TARGET)    
+macro (generate_ndkgdb_config TARGET)    
     MESSAGE(STATUS "Generating ndk-gdb config...")
     MESSAGE(STATUS "ANDROID_ABI: ${ANDROID_ABI}")
     EXEC_PROGRAM("\"${CMAKE_COMMAND}\" -E make_directory ${CMAKE_BINARY_DIR}/android")
@@ -59,18 +59,18 @@ MACRO (generate_ndkgdb_config TARGET)
                        POST_BUILD
                        COMMAND "${CMAKE_COMMAND}" ARGS "-E" "copy_directory" "${CMAKE_CURRENT_LIST_DIR}/libs" "${CMAKE_BINARY_DIR}/android/obj/local"
                        COMMAND "${CMAKE_COMMAND}" ARGS "-E" "copy_directory" "${CMAKE_BINARY_DIR}/android/libs" "${CMAKE_BINARY_DIR}/android/obj/local")
-ENDMACRO (generate_ndkgdb_config)
+endmacro (generate_ndkgdb_config)
 
 # Returns TRUE or FALSE in var if the list
 # contains the value
-MACRO(LIST_CONTAINS var value)
+macro(LIST_CONTAINS var value)
   SET(${var})
   FOREACH (value2 ${ARGN})
     IF (${value} STREQUAL ${value2})
       SET(${var} TRUE)
     ENDIF (${value} STREQUAL ${value2})
   ENDFOREACH (value2)
-ENDMACRO(LIST_CONTAINS)
+endmacro(LIST_CONTAINS)
 
 # Records paths of runtime files to be copied to defer the copying to later
 macro (append_to_runtime_files ATRF_PATH)
@@ -97,7 +97,7 @@ macro (run_command_as_top_level_project COMMAND_NAME)
     list_contains(QRESULT ${COMMAND_NAME} ${RCATLP_LIST})
     if (NOT QRESULT)
         list (APPEND RCATLP_LIST "${COMMAND_NAME}")
-        set (RCATLP_LIST "${RCATLP_LIST}" CACHE INTERNAL "Macros to be executed by the parent" FORCE)
+        set (RCATLP_LIST "${RCATLP_LIST}" CACHE INTERNAL "macros to be executed by the parent" FORCE)
     endif ()
 endmacro ()
 
@@ -106,7 +106,7 @@ endmacro ()
 # in the runtime folder if that folder is set (${RUNTIME_DIR}${RUNTIME_SUFFIX})
 # ${RUNTIME_SUFFIX} is used when you have a common runtime folder like ${CMAKE_BINARY_DIR} and you want to 
 # customize it depending on the platform.
-MACRO(COPY_RUNTIME_FILES)
+macro(COPY_RUNTIME_FILES)
     foreach (RTC_PATH ${RUNTIME_TO_COPY})
         message ("RTC_PATH: ${RTC_PATH}")
     	IF (NOT "${RUNTIME_DIR}" STREQUAL "")
@@ -141,11 +141,11 @@ MACRO(COPY_RUNTIME_FILES)
             endif ()
         endif ()
     endforeach ()
-ENDMACRO(COPY_RUNTIME_FILES)
+endmacro(COPY_RUNTIME_FILES)
 
 # A lot of variables are saved internally. In order for the update functionality of cmake to work
 # those variables need to be cleaned up.
-MACRO(CLEAR_CACHE)
+macro(CLEAR_CACHE)
     SET (SOURCE_LOCATIONS "" CACHE INTERNAL "sources locations" FORCE)
     foreach (module ${KRAL_MODULES_ADDED})
         set (EXPORTED_INCLUDES_${module} "")
@@ -153,12 +153,12 @@ MACRO(CLEAR_CACHE)
         set (PROJECT_TESTS_ADDED_${module} "" CACHE INTERNAL "" FORCE)
         set (EXPORTED_IOS_FRAMEWORKS_${module} "" CACHE INTERNAL "Exported IOS frameworks" FORCE)
     endforeach ()
-    SET (KRAL_MODULES_ADDED "" CACHE INTERNAL "Modules used by this project" FORCE)
-    SET (GLOBAL_TARGET_PROPERTY "" CACHE INTERNAL "Global target properties" FORCE)
+    set (KRAL_MODULES_ADDED "" CACHE INTERNAL "Modules used by this project" FORCE)
+    set (GLOBAL_TARGET_PROPERTY "" CACHE INTERNAL "Global target properties" FORCE)
     set (RUNTIME_TO_COPY "" CACHE INTERNAL "Runtime locations from which to copy files" FORCE)
     set (TESTS_TO_COPY "" CACHE INTERNAL "Runtime locations from which to copy files" FORCE)
-    set (RCATLP_LIST "" CACHE INTERNAL "Macros to be executed by the parent" FORCE)
-ENDMACRO(CLEAR_CACHE)
+    set (RCATLP_LIST "" CACHE INTERNAL "macros to be executed by the parent" FORCE)
+endmacro(CLEAR_CACHE)
 
 # List files from include, source/common and source/${PLATFORM}
 # The list is later used to create libraries and/or executables
@@ -242,11 +242,11 @@ macro (mark_lib_for_reuse MLFR_NAME)
     endif()
 endmacro()
 
-MACRO (set_global_target_property property value)
+macro (set_global_target_property property value)
     SET(GLOBAL_TARGET_PROPERTY "${GLOBAL_TARGET_PROPERTY};${property}[]${value}" CACHE INTERNAL "Global target properties" FORCE)
-ENDMACRO (set_global_target_property)
+endmacro (set_global_target_property)
 
-MACRO (apply_global_target_properties target)
+macro (apply_global_target_properties target)
     foreach (property ${GLOBAL_TARGET_PROPERTY}) 
         if (NOT "${property}" STREQUAL "") 
             string(REPLACE "[]" ";" pvpair "${property}")
@@ -255,16 +255,16 @@ MACRO (apply_global_target_properties target)
             set_target_properties(${target} PROPERTIES ${property_name} ${property_value}) 
         endif (NOT "${property}" STREQUAL "")
     endforeach (property)
-ENDMACRO (apply_global_target_properties)
+endmacro (apply_global_target_properties)
 
 # Runs the android create project command
-MACRO(generate_android_project)
+macro(generate_android_project)
     SET (ANDROID_APP_NAME ${ARGV0})
     SET (ANDROID_APP_PACKAGE ${ARGV1})
     SET (ANDROID_BINARY ${ARGV2})
 	EXEC_PROGRAM ("\"${CMAKE_COMMAND}\" -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/../${PLATFORM}")
     EXEC_PROGRAM ("${ANDROID_BINARY} create project --target ${ANDROID_TARGET} --name ${ANDROID_APP_NAME} --path ${CMAKE_BINARY_DIR}/${PLATFORM} --activity ${ANDROID_APP_NAME}Activity --package ${ANDROID_APP_PACKAGE}")
-ENDMACRO(generate_android_project)
+endmacro(generate_android_project)
 
 macro(include_directory_if_exists PATH)
 	IF (EXISTS "${PATH}")
@@ -402,7 +402,7 @@ macro(build_module)
     endif ()
 	MESSAGE (STATUS "Creating module ${NAME}")
 
-    # Execute other Macros
+    # Execute other macros
     foreach (RCATLP_COMMAND "${RCATLP_LIST}")
         string (LENGTH "${RCATLP_COMMAND}" LEN)
         if (NOT ${LEN} EQUAL 0)
@@ -471,7 +471,6 @@ macro(build_module)
 	endif() 
     endif()    
     copy_runtime_files()
-    CLEAR_CACHE()
 endmacro(build_module)
 
 # export_module_dependency can export a module to be used by the module dependent on it
@@ -582,6 +581,7 @@ macro(link_module_dependencies PNAME)
             TARGET_LINK_LIBRARIES("${ARGV1}" ${library})
         endif ()
     endforeach(library)
+    
 
     foreach (exported_framework ${IOS_FRAMEWORKS_TO_LINK_${PNAME}})
         if ("${ARGV1}" STREQUAL "")
@@ -595,6 +595,7 @@ macro(link_module_dependencies PNAME)
             link_module_dependencies(${PNAME}Tests ${test})
         endforeach()
     endif ()
+        SET(LIBS_${PNAME} "" CACHE INTERNAL "" FORCE)
     endif ()
 endmacro ()
 

@@ -56,3 +56,5 @@ elseif (WEB)
     #endforeach()
     SET_TARGET_PROPERTIES (${PROJ_NAME} PROPERTIES COMPILE_FLAGS "--preload-file assets@/assets")
 endif ()
+
+clear_cache()
