@@ -49,6 +49,7 @@ set (PROJECT_DIR_${CTARGET}     "${CMAKE_CURRENT_LIST_DIR}/SDLDemo")
 set (BUILD_DIR_${CTARGET}       "SDLDemo")
 set (PROJECT_TYPE_${CTARGET}    "Unix Makefiles")
 set (CUSTOM_ARGS_${CTARGET}     "-Wdev")
+set (COMPILER_CUSTOM_${CTARGET} "-Wno-warn-absolute-paths") 
 set (CUSTOM_ARGS_PD_${CTARGET}  "-DCMAKE_TOOLCHAIN_FILE=${KRAL_PATH}/Emscripten.cmake")
 set (BUILD_TYPE_${CTARGET}      "debug")
 
