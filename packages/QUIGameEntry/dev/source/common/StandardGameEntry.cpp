@@ -175,12 +175,12 @@ int SDL_main(int argc, char* argv[])
     LOG(INFO) << "App start.";
 
     SDL_Init(SDL_INIT_VIDEO);
-    qui::game->init();
     SDL_Surface *screen = SDL_SetVideoMode(qui::game->getWindow().getSize().x
                                          , qui::game->getWindow().getSize().y
                                          , 32
-                                         , SDL_SWSURFACE);
+                                         , SDL_OPENGL);
 
+    qui::game->init();
     qui::Timer timer;
     bool quit = false;
     while (!quit)
