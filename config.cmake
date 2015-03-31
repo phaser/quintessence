@@ -54,6 +54,20 @@ set (CUSTOM_ARGS_PD_${CTARGET}  "-DCMAKE_TOOLCHAIN_FILE=${KRAL_PATH}/Emscripten.
 set (BUILD_TYPE_${CTARGET}      "debug")
 
 # === TARGET
+set (CTARGET "SDLDemo-cppcheck")
+list (APPEND TARGETS ${CTARGET})
+copy_target ("DEFAULT" ${CTARGET})
+set (TARGET_NAME_${CTARGET}     "${CTARGET}")
+set (PLATFORM_${CTARGET}        "osx")
+set (PROJECT_DIR_${CTARGET}     "${CMAKE_CURRENT_LIST_DIR}/SDLDemo")
+set (BUILD_DIR_${CTARGET}       "SDLDemo")
+set (PROJECT_TYPE_${CTARGET}    "Unix Makefiles")
+set (CUSTOM_ARGS_${CTARGET}     "-Wdev")
+set (COMPILER_CUSTOM_${CTARGET} "-Wno-warn-absolute-paths") 
+set (CUSTOM_ARGS_PD_${CTARGET}  "-DCMAKE_TOOLCHAIN_FILE=${KRAL_PATH}/cppcheck.cmake")
+set (BUILD_TYPE_${CTARGET}      "debug")
+
+# === TARGET
 set (CTARGET "SDLDemo-osx-lib")
 list (APPEND TARGETS ${CTARGET})
 copy_target ("DEFAULT" ${CTARGET})
