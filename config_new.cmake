@@ -8,6 +8,7 @@ add_target ("__DEFAULT"
 
 # SDLDemo-osx
 add_target("SDLDemo-osx"
+    INHERIT         "__DEFAULT"
     PLATFORM        "osx"
     PROJECT_DIR     "${CMAKE_CURRENT_LIST_DIR}/SDLDemo"
     BUILD_DIR       "SDLDemo"
