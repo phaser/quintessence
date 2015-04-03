@@ -1,7 +1,7 @@
 # The project is licensed under GNU GPL v3. See $(PROJECT_ROOT)/docs/gpl-3.0.txt for more details.
 #
 # KRAL
-# Copyright (C) 2011 Cristian Bidea
+# Copyright (C) 2015 Cristian Bidea
 
 cmake_minimum_required (VERSION 3.0)
 cmake_policy(SET CMP0054 NEW)
@@ -153,11 +153,12 @@ macro (list_targets OUTVAR)
 endmacro()
 
 function (output_help)
-    set (MSG "USAGE: cmake -DT=[target] -D[BUILD_OPTION]=1 -P build.cmake
+    set (MSG "USAGE: cmake -D[BUILD_OPTION]=1 -P build.cmake
 
     BUILD_OPTION = GENERATE | COMPILE | UPDATE | BUILD | LIST
     BUILD_OPTION = You can also use just the first letter [GCUBL]
-    target = one of the target listed below
+    -DT=target   = Select a target by name.
+    -DN=         = Select a target by number.
 
     Available targets:")
     list_targets(OUTVAR)
