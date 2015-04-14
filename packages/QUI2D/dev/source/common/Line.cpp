@@ -63,7 +63,7 @@ Line* Line::getObject(const glm::vec2& p1, const glm::vec2& p2, const glm::vec4&
     GLfloat x2 = p2.x;
     GLfloat y2 = p2.y;
     GLfloat t = thick / 2;
-    GLfloat d = glm::sqrt<GLfloat>(glm::pow<GLfloat>((x2 - x1), 2)
+    GLfloat d = glm::sqrt(glm::pow<GLfloat>((x2 - x1), 2)
                                  + glm::pow<GLfloat>((y2 - y1), 2));
     GLfloat dx = glm::abs<GLfloat>(x2 - x1);
     GLfloat dy = glm::abs<GLfloat>(y2 - y1);

@@ -22,7 +22,7 @@ add_module_dependency(${PROJ_NAME} "QUIVirtualFS"  "dev")
 add_module_dependency(${PROJ_NAME} "QUIRenderer"   "dev")
 add_module_dependency(${PROJ_NAME} "QUIOpenGLES"   "dev")
 add_module_dependency(${PROJ_NAME} "QUIGameEntry"  "dev")
-add_module_dependency(${PROJ_NAME} "glm"           "0.9.3.3")
+add_module_dependency(${PROJ_NAME} "glm"           "0.9.6.3")
 
 make_library(${PROJ_NAME})
 

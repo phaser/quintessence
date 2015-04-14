@@ -15,7 +15,7 @@ endif ()
 
 add_module_dependency(${PROJ_NAME} "SDL2" "2.0.0")
 add_module_dependency(${PROJ_NAME} "QUI2D" "dev")
-add_module_dependency(${PROJ_NAME} "glm" "0.9.3.3")
+add_module_dependency(${PROJ_NAME} "glm" "0.9.6.3")
 add_module_dependency(${PROJ_NAME} "QUIUtils" "dev")
 add_module_dependency(${PROJ_NAME} "QUIText" "dev")
 add_module_dependency(${PROJ_NAME} "QUIOpenGLES" "dev")
