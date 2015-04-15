@@ -1,3 +1,6 @@
 [submodule "KRAL"]
 	path = KRAL
 	url = https://github.com/phaser/KRAL
+[submodule "thirdparty"]
+	path = thirdparty
+	url = https://github.com/phaser/KRAL_libs
