@@ -36,9 +36,36 @@ add_target (SDLDemo-web
     CUSTOM_ARGS_PD  "-DCMAKE_TOOLCHAIN_FILE=${KRAL_PATH}/Emscripten.cmake"
 )
 
-add_target (SDLDemo-cppcheck
+add_target (SDLDemo-osx-lib
     INHERIT         __DEFAULT
     PLATFORM        osx
-    CUSTOM_ARGS     -Wdev
-    CUSTOM_ARGS_PD  "-DCMAKE_TOOLCHAIN_FILE=${KRAL_PATH}/cppcheck.cmake"
+    PROJECT_TYPE    Xcode
+    CUSTOM_ARGS
+        "-Wdev"
+        " -DRUNTIME_DIR=debug"
+        " -DIOS_SDK_PATH=\"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs\""
+        " -DSHARED_LIB=1"
+)
+
+add_target (editor-osx
+    INHERIT         __DEFAULT
+    PLATFORM        osx
+    PROJECT_TYPE    Xcode
+    GEN_CMAKELISTS  True
+    CUSTOM_ARGS
+        "-Wdev"
+        " -DRUNTIME_DIR=debug"
+        " -DIOS_SDK_PATH=\"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs\""
+        " -DTARGETSDK=MacOSX10.10.sdk"
+        " -DQT5=1"
+)
+
+add_target (SDLDemo-iossim
+    INHERIT         __DEFAULT
+    PLATFORM        ios
+    PROJECT_TYPE    Xcode
+    CUSTOM_ARGS
+        "-Wdev"
+        " -DIOS_SDK_PATH=\"/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs\""
+        " -DTARGETSDK=iPhoneSimulator7.0.sdk "
 )
