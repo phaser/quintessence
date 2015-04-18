@@ -2,7 +2,7 @@ cmake_minimum_required (VERSION 2.8)
 set (PROJ_NAME "SDLDemo")
 set (CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${KRAL_PATH})
 project (${PROJ_NAME})
-include (KRALMain)
+include (main)
 
 if (OSX)
     set (BUILD_TYPE MACOSX_BUNDLE)
@@ -13,31 +13,30 @@ elseif (IOS)
     set_global_target_property(XCODE_ATTRIBUTE_IPHONEOS_DEPLOYMENT_TARGET 5.0) 
 endif ()
 
-add_module_dependency(${PROJ_NAME} "SDL2" "2.0.0")
-add_module_dependency(${PROJ_NAME} "QUI2D" "dev")
-add_module_dependency(${PROJ_NAME} "glm" "0.9.6.3")
-add_module_dependency(${PROJ_NAME} "QUIUtils" "dev")
-add_module_dependency(${PROJ_NAME} "QUIText" "dev")
-add_module_dependency(${PROJ_NAME} "QUIOpenGLES" "dev")
-add_module_dependency(${PROJ_NAME} "QUIRenderer" "dev")
-add_module_dependency(${PROJ_NAME} "QUIInput" "dev")
-add_module_dependency(${PROJ_NAME} "QUIReflection" "dev")
-add_module_dependency(${PROJ_NAME} "QUIVirtualFS" "dev")
-add_module_dependency(${PROJ_NAME} "QUIResourceLoader" "dev")
-add_module_dependency(${PROJ_NAME} "QUIGameEntry" "dev")
-#add_module_dependency(${PROJ_NAME} "QUIMemoryUtils" "dev")
-
 if (WEB)
     SET(CMAKE_EXECUTABLE_SUFFIX ".html")
 endif()
 
-if (SHARED_LIB)
-    make_shared_library(${PROJ_NAME})
-else ()
-    build_module(${PROJ_NAME} ${BUILD_TYPE})
-endif ()
-
-link_module_dependencies(${PROJ_NAME})
+module(${PROJ_NAME}
+        MODULE_TYPE ${BUILD_TYPE}
+        DEPENDENCY  SDL2                2.0.0
+        DEPENDENCY  QUI2D               dev
+        DEPENDENCY  glm                 0.9.6.3
+        DEPENDENCY  QUIUtils            dev
+        DEPENDENCY  QUIOpenGLES         dev
+        DEPENDENCY  QUIRenderer         dev
+        DEPENDENCY  QUIInput            dev
+        DEPENDENCY  QUIReflection       dev
+        DEPENDENCY  QUIVirtualFS        dev
+        DEPENDENCY  QUIResourceLoader   dev
+        DEPENDENCY  QUIGameEntry        dev
+)
+        
+#if (SHARED_LIB)
+#    make_shared_library(${PROJ_NAME})
+#else ()
+#    build_module(${PROJ_NAME} ${BUILD_TYPE})
+#endif ()
 
 if (IOS)
     SET_TARGET_PROPERTIES(${PROJ_NAME} PROPERTIES MACOSX_BUNDLE_INFO_PLIST "${CMAKE_CURRENT_LIST_DIR}/SDLDemo.plist")
@@ -56,5 +55,3 @@ elseif (WEB)
     exec_program ("\"${CMAKE_COMMAND}\" -E chdir ${CMAKE_BINARY_DIR} python ~/programe/emsdk_portable/emscripten/1.22.0/tools/file_packager.py resources.res ${ASSETS_FLAGS} > load_resources.js")
   
 endif ()
-
-clear_cache()
