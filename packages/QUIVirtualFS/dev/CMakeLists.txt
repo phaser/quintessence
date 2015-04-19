@@ -6,22 +6,22 @@ cmake_minimum_required (VERSION 2.8)
 SET (PROJ_NAME "QUIVirtualFS")
 PROJECT (${PROJ_NAME})
 
-
-add_module_dependency(${PROJ_NAME} "QUIUtils" "dev")
-add_module_dependency(${PROJ_NAME} "zlib" "1.2.5")
-add_module_dependency(${PROJ_NAME} "libzip" "0.9.3")
 IF (DEFINED TESTS)
-    add_module_dependency(${PROJ_NAME} "gtest" "1.6.0")
-    add_module_dependency(${PROJ_NAME} "gtest-entrypoint" "dev")
+    set (ADD_TESTS          "DEPENDENCY gtest 1.6.0")
+    set (ADD_TESTS_ENTRY    "DEPENDENCY gtest-entrypoint dev")
 ENDIF (DEFINED TESTS)
 
-make_library(${PROJ_NAME})
+library(${PROJ_NAME}
+        DEPENDENCY "QUIUtils" "dev"
+        DEPENDENCY "zlib" "1.2.5"
+        DEPENDENCY "libzip" "0.9.3"
+        ${ADD_TESTS}
+        ${ADD_TESTS_ENTRY}
+)
 
 IF (CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX)
     SET_TARGET_PROPERTIES (${PROJ_NAME} PROPERTIES COMPILE_FLAGS "-fPIC ${STOP_ON_ERRORS}")
 ENDIF (CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX)
-
-link_module_dependencies(${PROJ_NAME})
 
 IF (DEFINED TESTS)
     IF (LINUX)
