@@ -18,13 +18,12 @@ cmake_minimum_required (VERSION 2.8)
 SET (PROJ_NAME "QUIReflection")
 PROJECT (${PROJ_NAME})
 
-add_module_dependency(${PROJ_NAME} "tinyxml" "2.6.2")
-add_module_dependency(${PROJ_NAME} "QUIVirtualFS" "dev")
-add_module_dependency(${PROJ_NAME} "QUIUtils" "dev")
-IF (DEFINED TESTS)
-    add_module_dependency(${PROJ_NAME} "gtest" "1.6.0")
-ENDIF (DEFINED TESTS)
+#IF (DEFINED TESTS)
+#    add_module_dependency(${PROJ_NAME} "gtest" "1.6.0")
+#ENDIF (DEFINED TESTS)
 
-make_library(${PROJ_NAME})
-
-link_module_dependencies(${PROJ_NAME})
+library(${PROJ_NAME}
+        DEPENDENCY "tinyxml" "2.6.2"
+        DEPENDENCY "QUIVirtualFS" "dev"
+        DEPENDENCY "QUIUtils" "dev"
+)

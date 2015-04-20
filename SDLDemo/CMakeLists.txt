@@ -30,6 +30,7 @@ module(${PROJ_NAME}
         DEPENDENCY  QUIVirtualFS        dev
         DEPENDENCY  QUIResourceLoader   dev
         DEPENDENCY  QUIGameEntry        dev
+        DEPENDENCY  QUIText             dev
 )
         
 #if (SHARED_LIB)

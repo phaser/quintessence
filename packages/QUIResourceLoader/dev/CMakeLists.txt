@@ -18,16 +18,16 @@ cmake_minimum_required (VERSION 2.8)
 SET (PROJ_NAME "QUIResourceLoader")
 PROJECT (${PROJ_NAME})
 
-add_module_dependency(${PROJ_NAME} "QUIUtils" "dev")
-add_module_dependency(${PROJ_NAME} "QUIVirtualFS" "dev")
-add_module_dependency(${PROJ_NAME} "QUIRenderer" "dev")
-add_module_dependency(${PROJ_NAME} "QUIReflection" "dev")
-add_module_dependency(${PROJ_NAME} "QUIText" "dev")
+#IF (DEFINED TESTS)
+#    add_module_dependency(${PROJ_NAME} "gtest" "1.6.0")
+#ENDIF (DEFINED TESTS)
 
-IF (DEFINED TESTS)
-    add_module_dependency(${PROJ_NAME} "gtest" "1.6.0")
-ENDIF (DEFINED TESTS)
+library(${PROJ_NAME}
+        DEPENDENCY "QUIUtils" "dev"
+        DEPENDENCY "QUIVirtualFS" "dev"
+        DEPENDENCY "QUIRenderer" "dev"
+        DEPENDENCY "QUIReflection" "dev"
+        DEPENDENCY "QUIText" "dev"
+        DEPENDENCY "glm"    "0.9.6.3"
+)
 
-make_library(${PROJ_NAME})
-
-link_module_dependencies(${PROJ_NAME})

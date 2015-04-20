@@ -3,23 +3,20 @@ cmake_minimum_required (VERSION 2.8)
 SET (PROJ_NAME "QUIInput")
 PROJECT (${PROJ_NAME})
 
+#IF (DEFINED TESTS)
+#    add_module_dependency(${PROJ_NAME} "gtest" "1.6.0")
+#ENDIF (DEFINED TESTS)
 
-IF (DEFINED TESTS)
-    add_module_dependency(${PROJ_NAME} "gtest" "1.6.0")
-ENDIF (DEFINED TESTS)
-
-add_module_dependency(${PROJ_NAME} "QUIUtils" "dev")
-
-make_library(${PROJ_NAME})
+library(${PROJ_NAME}
+        DEPENDENCY "QUIUtils" "dev"
+)
 
 IF (CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX)
 	SET_TARGET_PROPERTIES (${PROJ_NAME} PROPERTIES COMPILE_FLAGS "-fPIC")
 ENDIF (CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX)
 
-link_module_dependencies(${PROJ_NAME})
-
-IF (DEFINED TESTS)
-    IF (LINUX)
-        TARGET_LINK_LIBRARIES (${PROJ_NAME} "pthread")
-    ENDIF (LINUX)
-ENDIF (DEFINED TESTS)
+#IF (DEFINED TESTS)
+#    IF (LINUX)
+#        TARGET_LINK_LIBRARIES (${PROJ_NAME} "pthread")
+#    ENDIF (LINUX)
+#ENDIF (DEFINED TESTS)
