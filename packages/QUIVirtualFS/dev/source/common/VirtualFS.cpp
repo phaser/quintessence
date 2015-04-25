@@ -192,7 +192,7 @@ void VirtualFS::removeRelativePath(std::string path)
  */
 cpp0x::shared_ptr<char> VirtualFS::getFileContentsAsText(const std::string& fileName)
 {
-    int length;
+    int length = 1;
     cpp0x::shared_ptr<char> result = getFileContents(fileName, &length, 1);
     result.get()[length-1] = '\0';
     return result;

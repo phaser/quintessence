@@ -14,6 +14,10 @@ add_target (SDLDemo-qt
     PLATFORM        qt5
     PROJECT_TYPE    "Unix Makefiles"
     CUSTOM_ARGS     -Wdev
+    COMPILER_ARGS_DEBUG
+        "-g -O0 -Wall -DPLATFORM_QT5" 
+    COMPILER_ARGS_RELEASE
+        "-O4 -Wall -DPLATFORM_QT5"
 )
 
 add_target (SDLDemo-osx
@@ -25,13 +29,24 @@ add_target (SDLDemo-osx
         " -DRUNTIME_DIR=debug"
         " -DIOS_SDK_PATH=\"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs\""
         " -DTARGETSDK=MacOSX10.9.sdk"
+        " -DCMAKE_XCODE_ATTRIBUTE_CLANG_CXX_LANGUAGE_STANDARD=c++11"
+        " -DCMAKE_XCODE_ATTRIBUTE_CLANG_CXX_LIBRARY=libc++" 
+    COMPILER_ARGS_DEBUG
+        "-g -O0 -Wall -DPLATFORM_OSX -std=c++11 -stdlib=libc++" 
+    COMPILER_ARGS_RELEASE
+        "-O4 -Wall -DPLATFORM_OSX -std=c++11 -stdlib=libc++"
 )
 
 add_target (SDLDemo-web
     INHERIT         __DEFAULT
     PLATFORM        web
     PROJECT_TYPE    "Unix Makefiles"
-    COMPILER_ARGS   "-Wno-warn-absolute-paths"
+    COMPILER_ARGS_DEBUG
+        "-Wno-warn-absolute-paths"
+        " -g -O0 -Wall -DPLATFORM_WEB" 
+    COMPILER_ARGS_RELEASE
+        "-Wno-warn-absolute-paths"
+        " -O4 -Wall -DPLATFORM_WEB"
     CUSTOM_ARGS     -Wdev
     CUSTOM_ARGS_PD  "-DCMAKE_TOOLCHAIN_FILE=${KRAL_PATH}/Emscripten.cmake"
 )
