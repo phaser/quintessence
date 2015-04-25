@@ -69,3 +69,23 @@ add_target (SDLDemo-iossim
         " -DIOS_SDK_PATH=\"/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs\""
         " -DTARGETSDK=iPhoneSimulator7.0.sdk "
 )
+
+add_target (SDLDemo-android
+    INHERIT         __DEFAULT
+    PLATFORM        android
+    PROJECT_TYPE    "Unix Makefiles"
+    CUSTOM_ARGS
+        "-Wdev"
+        " -DANDROID_APP_NAME=SDLDemo"
+        " -DANDROID_APP_PACKAGE=ro.qui.apps"
+    CUSTOM_ARGS_PD
+        " -DCMAKE_TOOLCHAIN_FILE=${KRAL_PATH}/android-cmake/android.toolchain.cmake"
+        " -DANDROID_NDK=$ENV{NDK}"
+        " -DANDROID_ABI=\"armeabi-v7a with NEON\""
+        " -DANDROID_NATIVE_API_LEVEL=android-19"
+        " -DANDROID_TOOLCHAIN_NAME=arm-linux-androideabi-clang3.3"
+    COMPILER_ARGS_DEBUG   
+        "-g -O0 -std=c++11 -DPLATFORM_ANDROID"
+    COMPILER_ARGS_RELEASE
+        "-O4 -std=c++11 -DPLATFORM_ANDROID"
+)

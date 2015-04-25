@@ -11,33 +11,38 @@ elseif (WIN32)
 elseif (IOS)
     set (BUILD_TYPE MACOSX_BUNDLE)
     set_global_target_property(XCODE_ATTRIBUTE_IPHONEOS_DEPLOYMENT_TARGET 5.0) 
+else()
+    set (BUILD_TYPE DISCARD)
 endif ()
 
 if (WEB)
     SET(CMAKE_EXECUTABLE_SUFFIX ".html")
 endif()
 
-module(${PROJ_NAME}
-        MODULE_TYPE ${BUILD_TYPE}
-        DEPENDENCY  SDL2                2.0.0
-        DEPENDENCY  QUI2D               dev
-        DEPENDENCY  glm                 0.9.6.3
-        DEPENDENCY  QUIUtils            dev
-        DEPENDENCY  QUIOpenGLES         dev
-        DEPENDENCY  QUIRenderer         dev
-        DEPENDENCY  QUIInput            dev
-        DEPENDENCY  QUIReflection       dev
-        DEPENDENCY  QUIVirtualFS        dev
-        DEPENDENCY  QUIResourceLoader   dev
-        DEPENDENCY  QUIGameEntry        dev
-        DEPENDENCY  QUIText             dev
-)
-        
-#if (SHARED_LIB)
-#    make_shared_library(${PROJ_NAME})
-#else ()
-#    build_module(${PROJ_NAME} ${BUILD_TYPE})
-#endif ()
+list (APPEND MODULE_DEPENDENCIES "DEPENDENCY;SDL2;2.0.0")
+list (APPEND MODULE_DEPENDENCIES "DEPENDENCY;glm;0.9.6.3")
+list (APPEND MODULE_DEPENDENCIES "DEPENDENCY;QUIUtils;dev")
+list (APPEND MODULE_DEPENDENCIES "DEPENDENCY;QUIOpenGLES;dev")
+list (APPEND MODULE_DEPENDENCIES "DEPENDENCY;QUIRenderer;dev")
+list (APPEND MODULE_DEPENDENCIES "DEPENDENCY;QUIInput;dev")
+list (APPEND MODULE_DEPENDENCIES "DEPENDENCY;QUIReflection;dev")
+list (APPEND MODULE_DEPENDENCIES "DEPENDENCY;QUIVirtualFS;dev")
+list (APPEND MODULE_DEPENDENCIES "DEPENDENCY;QUIResourceLoader;dev")
+list (APPEND MODULE_DEPENDENCIES "DEPENDENCY;QUIGameEntry;dev")
+list (APPEND MODULE_DEPENDENCIES "DEPENDENCY;QUIText;dev")
+list (APPEND MODULE_DEPENDENCIES "DEPENDENCY;QUI2D;dev")
+
+if (ANDROID)
+    library(${PROJ_NAME}
+            MODULE_TYPE SHARED
+            ${MODULE_DEPENDENCIES}
+    )
+else()
+    module(${PROJ_NAME}
+           MODULE_TYPE ${BUILD_TYPE}
+           ${MODULE_DEPENDENCIES}
+    )
+endif()
 
 if (IOS)
     SET_TARGET_PROPERTIES(${PROJ_NAME} PROPERTIES MACOSX_BUNDLE_INFO_PLIST "${CMAKE_CURRENT_LIST_DIR}/SDLDemo.plist")
