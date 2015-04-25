@@ -31,6 +31,7 @@ add_target (SDLDemo-osx
         " -DTARGETSDK=MacOSX10.9.sdk"
         " -DCMAKE_XCODE_ATTRIBUTE_CLANG_CXX_LANGUAGE_STANDARD=c++11"
         " -DCMAKE_XCODE_ATTRIBUTE_CLANG_CXX_LIBRARY=libc++" 
+        " -DTESTS=True"
     COMPILER_ARGS_DEBUG
         "-g -O0 -Wall -DPLATFORM_OSX -std=c++11 -stdlib=libc++" 
     COMPILER_ARGS_RELEASE
