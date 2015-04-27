@@ -59,7 +59,7 @@ bool Sprite::init()
         LOG(LERROR) << "Coudn't find material " << data->material << ".";
         return false;
     }
-    vobj = std::auto_ptr<GLVertexBufferObject>(new qui::GLVertexBufferObject(data->material));
+    vobj = std::unique_ptr<GLVertexBufferObject>(new qui::GLVertexBufferObject(data->material));
     vobj->setVertices(this->getVertices(), 20);
     vobj->setIndices(this->getIndices(), 6);
     vobj->prepareForPaint();

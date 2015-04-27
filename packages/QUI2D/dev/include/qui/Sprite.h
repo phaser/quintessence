@@ -52,12 +52,12 @@ class Sprite : public IObject
     void setMaterialId(size_t material);
     size_t getMaterialId() const;
  private:
-    std::auto_ptr<qui::GLVertexBufferObject> vobj;
+    std::unique_ptr<qui::GLVertexBufferObject> vobj;
     GLuint matrixLoc;
 
     GLfloat* getVertices();
     GLushort* getIndices();
-    std::auto_ptr<ObjectData> data;
+    std::unique_ptr<ObjectData> data;
 };
 }  // namespace 2D
 }  // namespace qui

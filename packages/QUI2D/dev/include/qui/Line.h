@@ -50,8 +50,8 @@ class Line : public IObject
  protected:
     Line();
  private:
-    std::auto_ptr<ObjectData> data;
-    std::auto_ptr<GLVertexBufferObject> vObj;
+    std::unique_ptr<ObjectData> data;
+    std::unique_ptr<GLVertexBufferObject> vObj;
 };
 }  // namespace Q2D
 }  // namespace qui

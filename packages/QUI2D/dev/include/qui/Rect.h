@@ -49,8 +49,8 @@ class Rect : public IObject
  protected:
     Rect();
  private:
-    std::auto_ptr<ObjectData> data;
-    std::auto_ptr<GLVertexBufferObject> vObj;
+    std::unique_ptr<ObjectData> data;
+    std::unique_ptr<GLVertexBufferObject> vObj;
 };
 }  // namespace Q2D
 }  // namespace qui

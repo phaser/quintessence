@@ -44,14 +44,14 @@ Rect* Rect::getObject(const glm::vec2& p1, const glm::vec2& p2, const glm::vec4&
         return NULL;
     }
 
-    result->data = std::auto_ptr<ObjectData>(new ObjectData());
+    result->data = std::unique_ptr<ObjectData>(new ObjectData());
     if (!(result->data.get()))
     {
         LOG(LERROR) << "Could not allocate data<ObjectData>.";
         return NULL;
     }
 
-    result->vObj = std::auto_ptr<GLVertexBufferObject>(
+    result->vObj = std::unique_ptr<GLVertexBufferObject>(
             new GLVertexBufferObject(qui::Hash(qui::Q2D::COLOR_SHADER).value, true));
     if (!result->vObj.get())
     {

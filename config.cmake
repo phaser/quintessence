@@ -99,7 +99,7 @@ add_target (SDLDemo-android
         " -DANDROID_NDK=$ENV{NDK}"
         " -DANDROID_ABI=\"armeabi-v7a with NEON\""
         " -DANDROID_NATIVE_API_LEVEL=android-19"
-        " -DANDROID_TOOLCHAIN_NAME=arm-linux-androideabi-clang3.3"
+        " -DANDROID_TOOLCHAIN_NAME=arm-linux-androideabi-clang3.5"
     COMPILER_ARGS_DEBUG   
         "-g -O0 -std=c++11 -DPLATFORM_ANDROID"
     COMPILER_ARGS_RELEASE
