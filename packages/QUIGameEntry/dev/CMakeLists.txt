@@ -34,7 +34,7 @@ ENDIF (ANDROID)
 
 library(${PROJ_NAME}
         DEPENDENCY "SDL2" "2.0.0"
-        DEPENDENCY "QUIOpenGLES" "dev"
+        DEPENDENCY "OpenGLES" "dev"
         DEPENDENCY "QUIVirtualFS" "dev"
         DEPENDENCY "QUIInput" "dev"
         DEPENDENCY "glm" "0.9.6.3"

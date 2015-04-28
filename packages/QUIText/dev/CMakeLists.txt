@@ -12,7 +12,7 @@ library(${PROJ_NAME}
         DEPENDENCY "glm" "0.9.6.3"
         DEPENDENCY "QUIUtils" "dev"
         DEPENDENCY "SDL2" "2.0.0"
-        DEPENDENCY "QUIOpenGLES" "dev"
+        DEPENDENCY "OpenGLES" "dev"
         DEPENDENCY "QUIVirtualFS" "dev"
         DEPENDENCY "QUI2D" "dev"
         DEPENDENCY "QUIRenderer" "dev"

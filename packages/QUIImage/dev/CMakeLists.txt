@@ -9,7 +9,7 @@ PROJECT (${PROJ_NAME})
 library(${PROJ_NAME}
         DEPENDENCY "lodepng" "20120729"
         DEPENDENCY "QUIUtils" "dev"
-        DEPENDENCY "QUIOpenGLES" "dev"
+        DEPENDENCY "OpenGLES" "dev"
         DEPENDENCY "QUIVirtualFS" "dev"
 )
 

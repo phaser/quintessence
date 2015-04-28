@@ -20,7 +20,7 @@ PROJECT (${PROJ_NAME})
 
 library(${PROJ_NAME}
         DEPENDENCY "QUIUtils"       "dev"
-        DEPENDENCY "QUIOpenGLES"    "dev"
+        DEPENDENCY "OpenGLES"    "dev"
         DEPENDENCY "QUIVirtualFS"   "dev"
         DEPENDENCY "QUIImage"       "dev"
         DEPENDENCY "tinyxml"        "2.6.2" 

@@ -21,7 +21,7 @@ library(${PROJ_NAME}
         DEPENDENCY "QUIUtils"      "dev"
         DEPENDENCY "QUIVirtualFS"  "dev"
         DEPENDENCY "QUIRenderer"   "dev"
-        DEPENDENCY "QUIOpenGLES"   "dev"
+        DEPENDENCY "OpenGLES"   "dev"
         DEPENDENCY "QUIGameEntry"  "dev"
         DEPENDENCY "glm"           "0.9.6.3"
 )
