@@ -7,7 +7,7 @@ SET (PROJ_NAME "QUIGameEntry")
 PROJECT (${PROJ_NAME})
 
 IF (ANDROID)
-	EXEC_PROGRAM ("android${CMDEXT} create project --target ${ANDROID_TARGET} --name ${ANDROID_APP_NAME} --path ${CMAKE_CURRENT_BINARY_DIR}/../${PLATFORM} --activity ${ANDROID_APP_NAME}Activity --package ${ANDROID_APP_PACKAGE} ")
+	EXEC_PROGRAM ("android${CMDEXT} create project --target ${ANDROID_TARGET} --name ${ANDROID_APP_NAME} --path ${CMAKE_CURRENT_BINARY_DIR}/../../${PLATFORM} --activity ${ANDROID_APP_NAME}Activity --package ${ANDROID_APP_PACKAGE} ")
 ELSEIF (OSX)
     export_ios_framework("Cocoa")
     export_ios_framework("GLKit")

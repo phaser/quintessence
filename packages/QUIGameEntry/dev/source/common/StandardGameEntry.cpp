@@ -15,13 +15,18 @@
 //    along with QUIGameEntry.  If not, see <http://www.gnu.org/licenses/>.
 #include <qui/StandardGameEntry.h>
 #include <iostream>
-#ifndef PLATFORM_WEB
+#ifdef PLATFORM_OSX
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_main.h>
 #include <SDL2/SDL_mouse.h>
-#else
+#elif defined(PLATFORM_WEB)
 #include <SDL/SDL.h>
+#else 
+#include <SDL.h>
+#include <SDL_main.h>
+#include <SDL_mouse.h>
 #endif
+
 #include <qui/InputInterface.h>
 #include <qui/TouchInputEvent.h>
 #include <qui/log.h>
