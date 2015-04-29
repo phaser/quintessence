@@ -61,3 +61,9 @@ elseif (WEB)
     exec_program ("\"${CMAKE_COMMAND}\" -E chdir ${CMAKE_BINARY_DIR} python ~/programe/emsdk_portable/emscripten/1.22.0/tools/file_packager.py resources.res ${ASSETS_FLAGS} > load_resources.js")
   
 endif ()
+
+if (NOT RUNTIME_COPIED)
+    init_runtime_location() 
+    copy_runtime_files()
+    set (RUNTIME_COPIED True CACHE INTERNAL "Runtime was copied" FORCE)
+endif()
