@@ -17,6 +17,7 @@
 #include <GameScene.h>
 #include <qui/Sprite.h>
 #include <qui/log.h>
+#include <stdlib.h>
 
 using qui::Q2D::IObject;
 const char SCORE_CONST[] = "Label::Score";
@@ -24,6 +25,7 @@ const char SCORE_CONST[] = "Label::Score";
 GameScene::GameScene(const qui::StandardGameEntry& game)
     : IRenderScene(game)
 {
+    double a = atof("123.3");
 }
 
 GameScene::~GameScene()
