@@ -41,6 +41,7 @@ if (ANDROID)
             MODULE_TYPE SHARED
             ${MODULE_DEPENDENCIES}
     )
+    generate_ndkgdb_config(${PROJ_NAME})
 else()
     module(${PROJ_NAME}
            MODULE_TYPE ${BUILD_TYPE}

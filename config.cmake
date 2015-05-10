@@ -97,7 +97,7 @@ add_target (SDLDemo-android
     CUSTOM_ARGS_PD
         " -DCMAKE_TOOLCHAIN_FILE=${KRAL_PATH}/android-cmake/android.toolchain.cmake"
         " -DANDROID_NDK=$ENV{NDK}"
-        " -DANDROID_ABI=\"armeabi-v7a with NEON\""
+        " -DANDROID_ABI=\"armeabi-v7a\""
         " -DANDROID_NATIVE_API_LEVEL=android-19"
         " -DANDROID_TOOLCHAIN_NAME=arm-linux-androideabi-clang3.5"
     COMPILER_ARGS_DEBUG   
