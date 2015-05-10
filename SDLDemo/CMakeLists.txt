@@ -19,6 +19,10 @@ if (WEB)
     SET(CMAKE_EXECUTABLE_SUFFIX ".html")
 endif()
 
+if (ANDROID)
+    set (PROJ_NAME "main")
+endif()
+
 list (APPEND MODULE_DEPENDENCIES "DEPENDENCY;SDL2;2.0.0")
 list (APPEND MODULE_DEPENDENCIES "DEPENDENCY;glm;0.9.6.3")
 list (APPEND MODULE_DEPENDENCIES "DEPENDENCY;QUIUtils;dev")
@@ -59,7 +63,8 @@ elseif (WEB)
     endforeach()
     message ("Preloaded: ${ASSETS_FLAGS}")
     exec_program ("\"${CMAKE_COMMAND}\" -E chdir ${CMAKE_BINARY_DIR} python ~/programe/emsdk_portable/emscripten/1.22.0/tools/file_packager.py resources.res ${ASSETS_FLAGS} > load_resources.js")
-  
+elseif (ANDROID)
+    set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/android/libs/armeabi)
 endif ()
 
 if (NOT RUNTIME_COPIED)
