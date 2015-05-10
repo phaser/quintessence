@@ -1,7 +1,7 @@
 compile
 =======
 
-    cmake -P KRAL/builder.cmake
+    cmake -P KRAL/build.cmake
 
 Mac OS X
 ========
