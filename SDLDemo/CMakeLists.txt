@@ -42,6 +42,11 @@ if (ANDROID)
             ${MODULE_DEPENDENCIES}
     )
     generate_ndkgdb_config(${PROJ_NAME})
+elseif (SHARED_LIB)
+    library(${PROJ_NAME}
+            MODULE_TYPE SHARED
+            ${MODULE_DEPENDENCIES}
+    )
 else()
     module(${PROJ_NAME}
            MODULE_TYPE ${BUILD_TYPE}

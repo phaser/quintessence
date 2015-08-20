@@ -6,11 +6,11 @@ typedef void (*gamePaint_t)();
 typedef void (*gameExit_t)();
 typedef void (*gameSetWindowSize_t)(uint16_t, uint16_t);
 
-#define GAME_INIT   "gameInit"
-#define GAME_UPDATE "gameUpdate"
-#define GAME_PAINT  "gamePaint"
-#define GAME_EXIT   "gameExit"
-#define GAME_SET_WINDOW_SIZE "gameSetWindowSize"
+#define GAME_INIT               "gameInit"
+#define GAME_UPDATE             "gameUpdate"
+#define GAME_PAINT              "gamePaint"
+#define GAME_EXIT               "gameExit"
+#define GAME_SET_WINDOW_SIZE    "gameSetWindowSize"
 
 class GameInterface
 {

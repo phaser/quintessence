@@ -62,6 +62,10 @@ add_target (SDLDemo-osx-lib
         " -DRUNTIME_DIR=debug"
         " -DIOS_SDK_PATH=\"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs\""
         " -DSHARED_LIB=1"
+    COMPILER_ARGS_DEBUG
+        "-g -O0 -Wall -DPLATFORM_OSX -std=c++11 -stdlib=libc++" 
+    COMPILER_ARGS_RELEASE
+        "-O4 -Wall -DPLATFORM_OSX -std=c++11 -stdlib=libc++"
 )
 
 add_target (editor-osx
