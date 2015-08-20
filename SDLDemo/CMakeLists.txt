@@ -69,7 +69,6 @@ elseif (ANDROID)
 endif ()
 
 if (NOT RUNTIME_COPIED)
-    init_runtime_location() 
     copy_runtime_files()
     set (RUNTIME_COPIED True CACHE INTERNAL "Runtime was copied" FORCE)
 endif()

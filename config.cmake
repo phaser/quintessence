@@ -13,7 +13,8 @@ add_target (SDLDemo-qt
     INHERIT         __DEFAULT
     PLATFORM        qt5
     PROJECT_TYPE    "Unix Makefiles"
-    CUSTOM_ARGS     -Wdev
+    CUSTOM_ARGS     "-Wdev"
+        "-DRUNTIME_DIR=${CMAKE_CURRENT_LIST_DIR}/projects/SDLDemo"
     COMPILER_ARGS_DEBUG
         "-g -O0 -Wall -DPLATFORM_QT5" 
     COMPILER_ARGS_RELEASE
@@ -67,6 +68,8 @@ add_target (editor-osx
     INHERIT         __DEFAULT
     PLATFORM        osx
     PROJECT_TYPE    Xcode
+    PROJECT_DIR     ${CMAKE_CURRENT_LIST_DIR}/editor
+    BUILD_DIR       editor
     GEN_CMAKELISTS  True
     CUSTOM_ARGS
         "-Wdev"

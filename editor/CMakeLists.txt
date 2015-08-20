@@ -2,7 +2,7 @@ cmake_minimum_required (VERSION 2.8)
 set (PROJ_NAME "editor")
 set (CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${KRAL_PATH})
 project (${PROJ_NAME})
-include (KRALMain)
+include (main)
 
 if (OSX)
     set (BUILD_TYPE MACOSX_BUNDLE)
@@ -19,13 +19,14 @@ if (QT5)
     qt5_wrap_ui(ui_mainwindow.h "${CMAKE_CURRENT_LIST_DIR}/source/common/mainwindow.ui")
 endif ()
 
-add_module_includes(${PROJ_NAME} "QUIGameEntry" "dev")
-add_module_includes(${PROJ_NAME} "glm" "0.9.3.3")
-add_module_dependency(${PROJ_NAME} "QUIUtils" "dev")
+module(${PROJ_NAME} 
+       MODULE_TYPE ${BUILD_TYPE}
+       DEPENDENCY QUIUtils dev
+)
 
-build_module(${PROJ_NAME} ${BUILD_TYPE})
+set_module_includes(${PROJ_NAME} "QUIGameEntry" "dev")
+set_module_includes(${PROJ_NAME} "glm" "0.9.3.3")
 
-link_module_dependencies(${PROJ_NAME})
 if (QT5)
     qt5_use_modules(${PROJ_NAME} Widgets)
     qt5_use_modules(${PROJ_NAME} OpenGL)
